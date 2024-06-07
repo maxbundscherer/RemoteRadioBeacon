@@ -16,10 +16,16 @@ class AbstractRadioControlService:
             mode='N/A',
             is_transmitting=False
         )
+        assert self._startup_test()
         print("- RadioControlService initialized.")
 
-    def startup_test(self):
+    def get_state(self) -> RadioState:
+        self._trigger_update_state()
+        return self._state
+
+    @staticmethod
+    def _startup_test() -> bool:
         raise NotImplementedError("Method must be implemented in derived classes.")
 
-    def get_state(self) -> RadioState:
+    def _trigger_update_state(self):
         raise NotImplementedError("Method must be implemented in derived classes.")

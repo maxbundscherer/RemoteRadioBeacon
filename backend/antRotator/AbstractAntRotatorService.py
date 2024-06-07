@@ -14,10 +14,16 @@ class AbstractAntRotatorService:
             azimuth=-1,
             elevation=-1
         )
+        assert self._startup_test()
         print("- AntRotatorService initialized.")
 
-    def startup_test(self):
+    def get_state(self) -> AntRotatorState:
+        self._trigger_update_state()
+        return self._state
+
+    @staticmethod
+    def _startup_test() -> bool:
         raise NotImplementedError("Method must be implemented in derived classes.")
 
-    def get_state(self) -> AntRotatorState:
+    def _trigger_update_state(self):
         raise NotImplementedError("Method must be implemented in derived classes.")
