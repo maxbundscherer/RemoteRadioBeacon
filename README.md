@@ -8,8 +8,8 @@ Tested on ...
 
 <table>
     <tr>
-        <td><img src="images/prev1.png" height="200px"></td>
-        <td><img src="images/prev2.png" height="200px"></td>
+        <td><img src="images/prev1.png" height="400px"></td>
+        <td><img src="images/prev2.png" height="400px"></td>
     </tr>
 </table>
 
