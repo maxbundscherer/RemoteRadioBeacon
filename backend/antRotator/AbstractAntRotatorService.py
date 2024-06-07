@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 
+from backend.ConfigService import ConfigService
 from backend.utils.TimeUtil import TimeUtil
 
 
@@ -12,13 +13,14 @@ class AntRotatorState:
 
 class AbstractAntRotatorService:
 
-    def __init__(self):
+    def __init__(self, config_service: ConfigService):
         self._state: AntRotatorState = AntRotatorState(
             azimuth=-1,
             elevation=-1,
             last_updated=TimeUtil.get_current_time_utc_str()
         )
         assert self._startup_test()
+        self._config_service: ConfigService = config_service
         print("- AntRotatorService initialized.")
 
     def get_state(self) -> AntRotatorState:

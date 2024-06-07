@@ -18,3 +18,12 @@ class DummyRadioControlService(AbstractRadioControlService):
             is_transmitting=random.choice([True, False]),
             last_updated=TimeUtil.get_current_time_utc_str()
         )
+
+    def start_transmit(self):
+        print("WARNING: DummyRadioControlService.start_transmit() called. Ignoring.")
+        print("SHOULD START TRANSMITTING")
+        print("WAV DURATION", self._config_service.get_local_wav_tx_duration())
+
+    def stop_transmit(self):
+        print("WARNING: DummyRadioControlService.stop_transmit() called. Ignoring.")
+        print("SHOULD STOP TRANSMITTING")
