@@ -3,7 +3,7 @@ from backend.antRotator.AbstractAntRotatorService import AbstractAntRotatorServi
 
 class DummyAntRotatorService(AbstractAntRotatorService):
 
-    def test(self):
+    def startup_test(self):
         pass
 
     def get_state(self) -> AntRotatorState:

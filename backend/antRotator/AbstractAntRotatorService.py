@@ -16,7 +16,7 @@ class AbstractAntRotatorService:
         )
         print("- AntRotatorService initialized.")
 
-    def test(self):
+    def startup_test(self):
         raise NotImplementedError("Method must be implemented in derived classes.")
 
     def get_state(self) -> AntRotatorState:

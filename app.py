@@ -98,6 +98,20 @@ def route_api_test():
     )
 
 
+@app.route('/api/ham/ant_rotator')
+def route_api_ham_ant_rotator():
+    return jsonify(
+        ham_service.get_ant_rotator_state()
+    )
+
+
+@app.route('/api/ham/radio')
+def route_api_ham_radio():
+    return jsonify(
+        ham_service.get_radio_state()
+    )
+
+
 if __name__ == '__main__':
     app.run(
         port=8000,

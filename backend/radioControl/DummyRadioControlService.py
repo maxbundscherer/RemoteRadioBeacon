@@ -3,7 +3,7 @@ from backend.radioControl.AbstractRadioControlService import AbstractRadioContro
 
 class DummyRadioControlService(AbstractRadioControlService):
 
-    def test(self):
+    def startup_test(self):
         pass
 
     def get_state(self) -> RadioState:
