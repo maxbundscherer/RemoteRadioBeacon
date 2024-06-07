@@ -1,10 +1,10 @@
-from backend.ham.AntennaRotatorService import AntennaRotatorService
+from backend.ham.AntRotatorService import AntRotatorService
 from backend.ham.RadioControlService import RadioControlService
 
 
 class HamService:
 
     def __init__(self):
-        self._antenna_rotator_service = AntennaRotatorService()
-        self._radio_control_service = RadioControlService()
+        self._ant_rotator_service: AntRotatorService = AntRotatorService()
+        self._radio_control_service: RadioControlService = RadioControlService()
         print("- HamService initialized.")
