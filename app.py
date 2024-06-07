@@ -55,7 +55,7 @@ def route_test_ui():
 def route_about():
     return render_template('simple_content.html',
                            site_title='About',
-                           page_content='Hello World!',
+                           page_content='73 de DD7MB',
                            )
 
 
