@@ -9,12 +9,17 @@
 
 <nav id="main_nav">
     <a href="{{ url_for('route_index') }}">Home</a>
+    <a href="{{ url_for('route_test') }}">Test</a>
+    <a href="{{ url_for('route_control') }}">Control</a>
+    <a href="{{ url_for('route_about') }}">About</a>
 </nav>
 
 <hr>
 
 <h1 style="margin-top: 15px; margin-bottom: 0">RemoteBeacon</h1>
 <p style="margin-top: 5px">An application to remotely rotate the antenna, set transmission parameters and transmit.</p>
+
+<img src="{{ url_for('static', filename='images/tower.png') }}" style="height: 50px;">
 
 <hr>
 
@@ -26,7 +31,7 @@
 
 <hr style="margin-top: 20px">
 
-<p style="margin-top: 0">Minions ipsum uuuhhh poopayee me want bananaaa!</p>
+<p style="margin-top: 0">DD7MB - The quick brown fox jumps over the lazy dog</p>
 
 </body>
 </html>
