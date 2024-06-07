@@ -7,6 +7,7 @@ from backend.utils.TimeUtil import TimeUtil
 class RadioState:
     frequency: float
     mode: str
+    power: int
     is_transmitting: bool
     last_updated: str
 
@@ -17,6 +18,7 @@ class AbstractRadioControlService:
         self._state: RadioState = RadioState(
             frequency=-1,
             mode='N/A',
+            power=-1,
             is_transmitting=False,
             last_updated=TimeUtil.get_current_time_utc_str()
         )

@@ -18,6 +18,7 @@
                 url: "{{ url_for("route_api_ham_radio") }}",
                 success: function (data) {
                     $("#lbl_radio_frequency").text(data["frequency"]);
+                    $("#lbl_radio_power").text(data["power"]);
                     $("#lbl_radio_mode").text(data["mode"]);
                     $("#lbl_radio_is_transmitting").text(data["is_transmitting"]);
                     $("#lbl_radio_last_updated").text(data["last_updated"]);
@@ -77,15 +78,15 @@
 
     <table class="tab-content">
         <tr>
-            <td>Last Updated</td>
+            <td>Last Updated (UTC)</td>
             <td><label id="lbl_ant_rot_last_updated">tbd</label></td>
         </tr>
         <tr>
-            <td>Azimuth</td>
+            <td>Azimuth (Degree)</td>
             <td><label id="lbl_ant_rot_azimuth">tbd</label></td>
         </tr>
         <tr>
-            <td>Elevation</td>
+            <td>Elevation (Degree)</td>
             <td><label id="lbl_ant_rot_elevation">tbd</label></td>
         </tr>
     </table>
@@ -93,12 +94,16 @@
     <h3>Radio</h3>
     <table class="tab-content">
         <tr>
-            <td>Last Updated</td>
+            <td>Last Updated (UTC)</td>
             <td><label id="lbl_radio_last_updated">tbd</label></td>
         </tr>
         <tr>
-            <td>Frequency</td>
+            <td>Frequency (Hz)</td>
             <td><label id="lbl_radio_frequency">tbd</label></td>
+        </tr>
+        <tr>
+            <td>Power (W)</td>
+            <td><label id="lbl_radio_power">tbd</label></td>
         </tr>
         <tr>
             <td>Mode</td>
