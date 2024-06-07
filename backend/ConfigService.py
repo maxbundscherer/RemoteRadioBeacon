@@ -4,11 +4,17 @@ from dataclasses_json import dataclass_json
 
 from backend.utils.TimeUtil import TimeUtil
 
+import librosa
+
 
 class ConfigService:
     C_APP_TITLE = 'RemoteBeacon'
     C_APP_VERSION = '0.0.2'
     C_LOCAL_FILE = 'config.json'
+
+    C_LOCAL_WAV_TX_FILE = 'transmit.wav'
+    C_LOCAL_WAV_TX_SR = -1
+    C_LOCAL_WAV_TX_DURATION = -1
 
     @staticmethod
     def get_app_title() -> str:
@@ -17,6 +23,14 @@ class ConfigService:
     @staticmethod
     def get_app_version() -> str:
         return ConfigService.C_APP_VERSION
+
+    @staticmethod
+    def get_local_wav_tx_sr() -> int:
+        return ConfigService.C_LOCAL_WAV_TX_SR
+
+    @staticmethod
+    def get_local_wav_tx_duration() -> float:
+        return ConfigService.C_LOCAL_WAV_TX_DURATION
 
     @dataclass_json
     @dataclass
@@ -42,6 +56,16 @@ class ConfigService:
     def __init__(self):
         self._config: ConfigService.Config = ConfigService.from_json_file(ConfigService.C_LOCAL_FILE)
         self._startup_time: str = TimeUtil.get_current_time_utc_str()
+
+        # Set wav file properties
+        assert os.path.exists(ConfigService.C_LOCAL_WAV_TX_FILE)
+        y, sr = librosa.load(ConfigService.C_LOCAL_WAV_TX_FILE)
+        ConfigService.C_LOCAL_WAV_TX_SR = sr
+        ConfigService.C_LOCAL_WAV_TX_DURATION = round(librosa.get_duration(y=y, sr=sr), 3)
+        assert ConfigService.C_LOCAL_WAV_TX_SR > 0
+        assert ConfigService.C_LOCAL_WAV_TX_DURATION > 0
+        del y, sr
+
         print("- ConfigService initialized.")
 
     def get_config(self) -> Config:

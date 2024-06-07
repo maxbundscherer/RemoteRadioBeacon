@@ -31,6 +31,9 @@ def route_index():
     page_html += '<tr><td><br></td><td></td></tr>'
     page_html += f'<tr><td>Ant Rotator</td><td>{config_service.get_config().ant_rotator_service}</td></tr>'
     page_html += f'<tr><td>Radio Control</td><td>{config_service.get_config().radio_control_service}</td></tr>'
+    page_html += '<tr><td><br></td><td></td></tr>'
+    page_html += f'<tr><td>TX-Wav Sampling-Rate (Hz)</td><td>{config_service.get_local_wav_tx_sr()}</td></tr>'
+    page_html += f'<tr><td>TX-Wav Duration (sec)</td><td>{config_service.get_local_wav_tx_duration()}</td></tr>'
     page_html += '</table>'
     return render_template('simple_html.html',
                            site_app_title=config_service.get_app_title(),
