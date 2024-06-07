@@ -11,14 +11,20 @@ class TestService:
         created_at: str = ''
 
     def __init__(self):
-        self._test_description = 'This is a test item.'
+        self._test_description = 'TestDesc'
         self._test_int: int = 42
 
     def set_test_description(self, description: str):
         self._test_description = description
 
+    def get_test_description(self) -> str:
+        return self._test_description
+
     def set_test_int(self, test_int: int):
         self._test_int = test_int
+
+    def get_test_int(self) -> int:
+        return self._test_int
 
     def get_test_item(self) -> TestItem:
         return TestService.TestItem(

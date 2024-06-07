@@ -39,9 +39,11 @@ def route_control():
         test_service.set_test_int(
             int(request.form['test_int'])
         )
-        
+
     return render_template('control.html',
                            site_title='Control',
+                           page_test_int=test_service.get_test_int(),
+                           page_test_description=test_service.get_test_description(),
                            )
 
 
@@ -60,6 +62,8 @@ def route_test_ui():
 
     return render_template('test_ui.html',
                            site_title='Test-UI',
+                           page_test_int=test_service.get_test_int(),
+                           page_test_description=test_service.get_test_description(),
                            )
 
 
