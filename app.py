@@ -14,7 +14,7 @@ def route_index():
     page_html = "<p>Please make a selection:</p><ul>"
     for url_title, url_target in [
         ('Control', url_for('route_control')),
-        ('Test', url_for('route_test')),
+        ('Test-UI', url_for('route_test_ui')),
         ('About', url_for('route_about')),
     ]:
         page_html += f'<li><a href="{url_target}">{url_title}</a></li>'
@@ -33,8 +33,8 @@ def route_control():
                            )
 
 
-@app.route('/test', methods=['GET', 'POST'])
-def route_test():
+@app.route('/test/ui', methods=['GET', 'POST'])
+def route_test_ui():
     if request.method == 'POST':
         data = request.get_data()
         print(data)
@@ -46,8 +46,8 @@ def route_test():
             int(request.form['test_int'])
         )
 
-    return render_template('test.html',
-                           site_title='Test',
+    return render_template('test_ui.html',
+                           site_title='Test-UI',
                            )
 
 
