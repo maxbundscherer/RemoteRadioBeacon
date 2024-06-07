@@ -10,7 +10,7 @@ class ConfigService:
     @dataclass_json
     @dataclass
     class Config:
-        local_locator: str
+        tx_locator: str
 
     # @staticmethod
     # def to_json_file(config: Config, fp: str):
@@ -34,5 +34,5 @@ class ConfigService:
         return self._config
 
 # if __name__ == '__main__':
-#     # sample_config = ConfigService.Config(local_locator='JN59')
+#     # sample_config = ConfigService.Config(tx_locator='JN59')
 #     # ConfigService.to_json_file(sample_config, ConfigService.C_LOCAL_FILE)
