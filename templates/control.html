@@ -14,6 +14,16 @@
                 }
             });
 
+            $.ajax({
+                url: "{{ url_for("route_api_ham_radio") }}",
+                success: function (data) {
+                    $("#lbl_radio_frequency").text(data["frequency"]);
+                    $("#lbl_radio_mode").text(data["mode"]);
+                    $("#lbl_radio_is_transmitting").text(data["is_transmitting"]);
+                    $("#lbl_radio_last_updated").text(data["last_updated"]);
+                }
+            });
+
         }
 
         var background_refresh = -1;
@@ -79,6 +89,27 @@
             <td><label id="lbl_ant_rot_elevation">tbd</label></td>
         </tr>
     </table>
+
+    <h3>Radio</h3>
+    <table class="tab-content">
+        <tr>
+            <td>Last Updated</td>
+            <td><label id="lbl_radio_last_updated">tbd</label></td>
+        </tr>
+        <tr>
+            <td>Frequency</td>
+            <td><label id="lbl_radio_frequency">tbd</label></td>
+        </tr>
+        <tr>
+            <td>Mode</td>
+            <td><label id="lbl_radio_mode">tbd</label></td>
+        </tr>
+        <tr>
+            <td>Is Transmitting</td>
+            <td><label id="lbl_radio_is_transmitting">tbd</label></td>
+        </tr>
+    </table>
+
 
 
     <script>
