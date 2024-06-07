@@ -36,7 +36,7 @@ def route_test():
             request.form['description']
         )
         test_service.set_test_int(
-            request.form['test_int']
+            int(request.form['test_int'])
         )
 
     return render_template('test.html',
