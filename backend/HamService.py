@@ -10,8 +10,8 @@ class HamService:
         self._ant_rotator_service: AbstractAntRotatorService = DummyAntRotatorService()
         self._radio_control_service: AbstractRadioControlService = DummyRadioControlService()
 
-        self._ant_rotator_service.startup_test()
-        self._radio_control_service.startup_test()
+        # self._ant_rotator_service.startup_test()
+        # self._radio_control_service.startup_test()
 
         print("- HamService initialized.")
 
