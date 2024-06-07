@@ -3,7 +3,7 @@
 {% block content %}
 
     <script>
-        function test_function() {
+        function refresh() {
 
             $.ajax({
                 url: "{{ url_for("route_api_test") }}",
@@ -20,17 +20,18 @@
 
         }
 
-        var background_interval = -1;
+        var background_refresh = -1;
 
-        function start_test() {
-            if (background_interval !== -1) {
+        function start_refresh() {
+            if (background_refresh !== -1) {
                 return;
             }
-            background_interval = window.setInterval(function () {
-                test_function();
+            background_refresh = window.setInterval(function () {
+                refresh();
             }, 1000);
+
             Toastify({
-                text: "Start Auto Loading",
+                text: "Start Background Refresh",
                 position: "center",
                 gravity: "bottom",
                 duration: 5000,
@@ -40,11 +41,11 @@
             }).showToast();
         }
 
-        function stop_test() {
-            window.clearInterval(background_interval);
-            background_interval = -1;
+        function stop_refresh() {
+            window.clearInterval(background_refresh);
+            background_refresh = -1;
             Toastify({
-                text: "Stop Auto Loading",
+                text: "Stop Background Refresh",
                 position: "center",
                 gravity: "bottom",
                 duration: 5000,
@@ -61,9 +62,9 @@
     <h3>Get Test</h3>
 
     <ul>
-        <li><a href="javascript:test_function()">Manual</a></li>
-        <li><a href="javascript:start_test()">Start</a></li>
-        <li><a href="javascript:stop_test()">Stop</a></li>
+        <li><a href="javascript:refresh()">Manual Refresh</a></li>
+        <li><a href="javascript:start_refresh()">Start Background Refresh</a></li>
+        <li><a href="javascript:stop_refresh()">Stop Background Refresh</a></li>
     </ul>
 
     <table class="tab-content">
@@ -109,7 +110,7 @@
     </form>
 
     <script>
-        start_test();
+        start_refresh();
     </script>
 
 {% endblock %}
