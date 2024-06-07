@@ -18,16 +18,35 @@
             });
 
         }
+
+        var background_interval = -1;
+
+        function start_test() {
+            background_interval = window.setInterval(function () {
+                test_function();
+            }, 1000);
+        }
+
+        function stop_test() {
+            window.clearInterval(background_interval);
+        }
+
     </script>
 
-    <p>
-        <a href="javascript:test_function()">Click me</a>
-    </p>
+    <ul>
+        <li><a href="javascript:test_function()">Manual</a></li>
+        <li><a href="javascript:start_test()">Start</a></li>
+        <li><a href="javascript:stop_test()">Stop</a></li>
+    </ul>
 
     <ul>
         <li>Name: <label id="lbl_name">tbd</label></li>
         <li>Description: <label id="lbl_description">tbd</label></li>
         <li>Created at: <label id="lbl_created_at">tbd</label></li>
     </ul>
+
+    <script>
+        start_test();
+    </script>
 
 {% endblock %}
