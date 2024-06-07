@@ -33,12 +33,12 @@ a {
     /*margin: 0;*/
     /*padding: 0;*/
     /*width: 150px;*/
-    width: 80%;
+    width: 90%;
 }
 
 
 .tab-content {
-    width: 80%;
+    width: 100%;
     /*border: 2px solid black;*/
     max-width: 400px;
 }
