@@ -23,13 +23,35 @@
         var background_interval = -1;
 
         function start_test() {
+            if (background_interval !== -1) {
+                return;
+            }
             background_interval = window.setInterval(function () {
                 test_function();
             }, 1000);
+            Toastify({
+                text: "Start Auto Loading",
+                position: "center",
+                gravity: "bottom",
+                duration: 5000,
+                style: {
+                    background: "green",
+                },
+            }).showToast();
         }
 
         function stop_test() {
             window.clearInterval(background_interval);
+            background_interval = -1;
+            Toastify({
+                text: "Stop Auto Loading",
+                position: "center",
+                gravity: "bottom",
+                duration: 5000,
+                style: {
+                    background: "red",
+                },
+            }).showToast();
         }
 
     </script>
