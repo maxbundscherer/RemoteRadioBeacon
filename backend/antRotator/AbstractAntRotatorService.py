@@ -1,14 +1,16 @@
 from dataclasses import dataclass
 
 
+@dataclass
+class AntRotatorState:
+    azimuth: float
+    elevation: float
+
+
 class AbstractAntRotatorService:
-    @dataclass
-    class AntRotatorState:
-        azimuth: float
-        elevation: float
 
     def __init__(self):
-        self._state: AbstractAntRotatorService.AntRotatorState = AbstractAntRotatorService.AntRotatorState(
+        self._state: AntRotatorState = AntRotatorState(
             azimuth=-1,
             elevation=-1
         )

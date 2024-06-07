@@ -1,15 +1,17 @@
 from dataclasses import dataclass
 
 
+@dataclass
+class RadioState:
+    frequency: float
+    mode: str
+    is_transmitting: bool
+
+
 class AbstractRadioControlService:
-    @dataclass
-    class RadioState:
-        frequency: float
-        mode: str
-        is_transmitting: bool
 
     def __init__(self):
-        self._state: AbstractRadioControlService.RadioState = AbstractRadioControlService.RadioState(
+        self._state: RadioState = RadioState(
             frequency=-1,
             mode='N/A',
             is_transmitting=False
