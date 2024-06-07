@@ -1,11 +1,14 @@
 from dataclasses import dataclass
 
+from backend.utils.TimeUtil import TimeUtil
+
 
 @dataclass
 class RadioState:
     frequency: float
     mode: str
     is_transmitting: bool
+    last_updated: str
 
 
 class AbstractRadioControlService:
@@ -14,7 +17,8 @@ class AbstractRadioControlService:
         self._state: RadioState = RadioState(
             frequency=-1,
             mode='N/A',
-            is_transmitting=False
+            is_transmitting=False,
+            last_updated=TimeUtil.get_current_time_utc_str()
         )
         assert self._startup_test()
         print("- RadioControlService initialized.")

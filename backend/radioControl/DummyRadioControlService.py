@@ -1,6 +1,7 @@
 import random
 
 from backend.radioControl.AbstractRadioControlService import AbstractRadioControlService, RadioState
+from backend.utils.TimeUtil import TimeUtil
 
 
 class DummyRadioControlService(AbstractRadioControlService):
@@ -13,5 +14,6 @@ class DummyRadioControlService(AbstractRadioControlService):
         self._state = RadioState(
             frequency=random.uniform(0, 1500),
             mode=['LSB', 'USB', 'CW', 'AM', 'FM', 'N/A'][random.randint(0, 5)],
-            is_transmitting=random.choice([True, False])
+            is_transmitting=random.choice([True, False]),
+            last_updated=TimeUtil.get_current_time_utc_str()
         )

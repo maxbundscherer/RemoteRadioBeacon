@@ -1,10 +1,13 @@
 from dataclasses import dataclass
 
+from backend.utils.TimeUtil import TimeUtil
+
 
 @dataclass
 class AntRotatorState:
     azimuth: float
     elevation: float
+    last_updated: str
 
 
 class AbstractAntRotatorService:
@@ -12,7 +15,8 @@ class AbstractAntRotatorService:
     def __init__(self):
         self._state: AntRotatorState = AntRotatorState(
             azimuth=-1,
-            elevation=-1
+            elevation=-1,
+            last_updated=TimeUtil.get_current_time_utc_str()
         )
         assert self._startup_test()
         print("- AntRotatorService initialized.")
