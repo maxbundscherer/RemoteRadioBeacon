@@ -6,15 +6,11 @@
         function refresh() {
 
             $.ajax({
-                url: "{{ url_for("route_api_test") }}",
-                {#type: "GET",#}
-                {#dataType: "json",#}
-                {#contentType: "application/json; charset=utf-8",#}
+                url: "{{ url_for("route_api_ham_ant_rotator") }}",
                 success: function (data) {
-                    $("#lbl_name").text(data["name"]);
-                    $("#lbl_description").text(data["description"]);
-                    $("#lbl_int").text(data["test_int"]);
-                    $("#lbl_created_at").text(data["created_at"]);
+                    $("#lbl_ant_rot_azimuth").text(Math.round(data["azimuth"] * 100) / 100);
+                    $("#lbl_ant_rot_elevation").text(Math.round(data["elevation"] * 100) / 100);
+                    $("#lbl_ant_rot_last_updated").text(data["last_updated"]);
                 }
             });
 
@@ -59,7 +55,7 @@
 
     <p>This page is for tbd.</p>
 
-    <h3>Get Test</h3>
+    <h3>Page Control</h3>
 
     <ul>
         <li><a href="javascript:refresh()">Manual Refresh</a></li>
@@ -67,51 +63,23 @@
         <li><a href="javascript:stop_refresh()">Stop Background Refresh</a></li>
     </ul>
 
+    <h3>Antenna Rotator</h3>
+
     <table class="tab-content">
         <tr>
-            <td>Name</td>
-            <td><label id="lbl_name">tbd</label></td>
+            <td>Last Updated</td>
+            <td><label id="lbl_ant_rot_last_updated">tbd</label></td>
         </tr>
         <tr>
-            <td>Description</td>
-            <td><label id="lbl_description">tbd</label></td>
+            <td>Azimuth</td>
+            <td><label id="lbl_ant_rot_azimuth">tbd</label></td>
         </tr>
         <tr>
-            <td>Test-Int</td>
-            <td><label id="lbl_int">tbd</label></td>
-        </tr>
-        <tr>
-            <td>Created at</td>
-            <td><label id="lbl_created_at">tbd</label></td>
+            <td>Elevation</td>
+            <td><label id="lbl_ant_rot_elevation">tbd</label></td>
         </tr>
     </table>
 
-    <h3>Post Test</h3>
-
-    <form action="{{ url_for('route_control') }}" method="post" enctype="multipart/form-data">
-
-        <table class="tab-content">
-            <tr>
-                <td>Description</td>
-                <td><input type="text" class="input-same-width"
-                           id="description"
-                           name="description"
-                           value="{{ page_test_description }}"></td>
-            </tr>
-            <tr>
-                <td>Test-Int</td>
-                <td><input type="number" class="input-same-width"
-                           id="test_int"
-                           name="test_int"
-                           value="{{ page_test_int }}"></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><input type="submit" value="Submit"></td>
-            </tr>
-        </table>
-
-    </form>
 
     <script>
         start_refresh();
