@@ -47,6 +47,16 @@
         <li>Created at: <label id="lbl_created_at">tbd</label></li>
     </ul>
 
+    <form action="{{ url_for('route_test') }}" method="post" enctype="multipart/form-data">
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description" value="tbd">
+        <br>
+        <label for="test_int">Test-Int:</label>
+        <input type="number" id="test_int" name="test_int" value="0">
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+
     <script>
         start_test();
     </script>
