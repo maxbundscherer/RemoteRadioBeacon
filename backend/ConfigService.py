@@ -1,7 +1,8 @@
-import json
 import os
 from dataclasses import dataclass
 from dataclasses_json import dataclass_json
+
+from backend.utils.TimeUtil import TimeUtil
 
 
 class ConfigService:
@@ -28,10 +29,14 @@ class ConfigService:
 
     def __init__(self):
         self._config: ConfigService.Config = ConfigService.from_json_file(ConfigService.C_LOCAL_FILE)
+        self._startup_time: str = TimeUtil.get_current_time_utc_str()
         print("- ConfigService initialized.")
 
     def get_config(self) -> Config:
         return self._config
+
+    def get_startup_time(self) -> str:
+        return self._startup_time
 
 # if __name__ == '__main__':
 #     # sample_config = ConfigService.Config(tx_locator='JN59')

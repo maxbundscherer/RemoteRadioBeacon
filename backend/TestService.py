@@ -1,5 +1,6 @@
-import time
 from dataclasses import dataclass
+
+from backend.utils.TimeUtil import TimeUtil
 
 
 class TestService:
@@ -31,5 +32,5 @@ class TestService:
             name='Test 1',
             description=self._test_description,
             test_int=self._test_int,
-            created_at=time.strftime('%Y-%m-%d %H:%M:%S')
+            created_at=TimeUtil.get_current_time_utc_str()
         )

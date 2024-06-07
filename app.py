@@ -23,8 +23,10 @@ def route_index():
     ]:
         page_html += f'<li><a href="{url_target}">{url_title}</a></li>'
     page_html += "</ul>"
-    page_html += "<h3>Config</h3>"
+    page_html += "<h3>Overview</h3>"
     page_html += '<table class="tab-content">'
+    page_html += f'<tr><td>Startup Time</td><td>{config_service.get_startup_time()}</td></tr>'
+    page_html += '<tr><td></td><td></td><td>'
     page_html += f'<tr><td>TX Locator</td><td>{config_service.get_config().tx_locator}</td></tr>'
     page_html += '</table>'
     return render_template('simple_html.html',
