@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ site_title }} - RemoteBeacon</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
+</head>
+<body>
+
+<nav id="main_nav">
+    <a href="{{ url_for('route_index') }}">Home</a>
+</nav>
+
+<hr>
+
+<h1 style="margin-top: 15px; margin-bottom: 0">RemoteBeacon</h1>
+<p style="margin-top: 5px">An application to remotely rotate the antenna, set transmission parameters and transmit.</p>
+
+<hr>
+
+<h2>{{ site_title }}</h2>
+
+<div class="content">
+    {% block content %} {% endblock %}
+</div>
+
+<hr style="margin-top: 20px">
+
+<p style="margin-top: 0">Minions ipsum uuuhhh poopayee me want bananaaa!</p>
+
+</body>
+</html>

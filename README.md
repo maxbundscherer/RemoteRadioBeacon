@@ -9,7 +9,6 @@ Tested on ...
 - `conda create --name py311RemoteBeacon python=3.11`
 - `conda activate py311RemoteBeacon`
 - `pip install -r requirements.txt`
--
 
 ## Start
 
