@@ -30,6 +30,8 @@ def route_index():
     page_html += f'<tr><td>TX Locator</td><td>{config_service.get_config().tx_locator}</td></tr>'
     page_html += '</table>'
     return render_template('simple_html.html',
+                           site_app_title=config_service.get_app_title(),
+                           site_app_version=config_service.get_app_version(),
                            site_title='Home',
                            page_html=page_html,
                            )
@@ -49,6 +51,8 @@ def route_control():
         )
 
     return render_template('control.html',
+                           site_app_title=config_service.get_app_title(),
+                           site_app_version=config_service.get_app_version(),
                            site_title='Control',
                            page_test_int=test_service.get_test_int(),
                            page_test_description=test_service.get_test_description(),
@@ -69,6 +73,8 @@ def route_test_ui():
         )
 
     return render_template('test_ui.html',
+                           site_app_title=config_service.get_app_title(),
+                           site_app_version=config_service.get_app_version(),
                            site_title='Test-UI',
                            page_test_int=test_service.get_test_int(),
                            page_test_description=test_service.get_test_description(),
@@ -78,6 +84,8 @@ def route_test_ui():
 @app.route('/about')
 def route_about():
     return render_template('simple_content.html',
+                           site_app_title=config_service.get_app_title(),
+                           site_app_version=config_service.get_app_version(),
                            site_title='About',
                            page_content='73 de DD7MB',
                            )

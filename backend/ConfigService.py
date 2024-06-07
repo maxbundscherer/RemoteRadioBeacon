@@ -6,7 +6,17 @@ from backend.utils.TimeUtil import TimeUtil
 
 
 class ConfigService:
+    C_APP_TITLE = 'RemoteBeacon'
+    C_APP_VERSION = '0.0.2'
     C_LOCAL_FILE = 'config.json'
+
+    @staticmethod
+    def get_app_title() -> str:
+        return ConfigService.C_APP_TITLE
+    
+    @staticmethod
+    def get_app_version() -> str:
+        return ConfigService.C_APP_VERSION
 
     @dataclass_json
     @dataclass

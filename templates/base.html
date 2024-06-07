@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{ site_title }} - RemoteBeacon</title>
+    <title>{{ site_title }} - {{ site_app_title }}</title>
 
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/toastify.min.css') }}">
@@ -21,7 +21,7 @@
 
 <hr>
 
-<h1 style="margin-top: 15px; margin-bottom: 0">RemoteBeacon</h1>
+<h1 style="margin-top: 15px; margin-bottom: 0">{{ site_app_title }}</h1>
 <p style="margin-top: 5px">An application to remotely rotate the antenna, set transmission parameters and transmit.</p>
 
 <img src="{{ url_for('static', filename='images/tower.png') }}" style="height: 50px;">
@@ -36,7 +36,7 @@
 
 <hr style="margin-top: 20px">
 
-<p style="margin-top: 0">The quick brown fox jumps over the lazy dog</p>
+<p style="margin-top: 0">{{ site_app_title }} - v{{ site_app_version }}</p>
 
 </body>
 </html>
