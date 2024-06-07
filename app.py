@@ -26,7 +26,7 @@ def route_index():
     page_html += "<h3>Overview</h3>"
     page_html += '<table class="tab-content">'
     page_html += f'<tr><td>Startup Time</td><td>{config_service.get_startup_time()}</td></tr>'
-    page_html += '<tr><td></td><td></td><td>'
+    page_html += '<tr><td></td><td></td></tr>'
     page_html += f'<tr><td>TX Locator</td><td>{config_service.get_config().tx_locator}</td></tr>'
     page_html += '</table>'
     return render_template('simple_html.html',
