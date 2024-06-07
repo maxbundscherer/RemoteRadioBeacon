@@ -64,6 +64,40 @@
 
     </script>
 
+    <script>
+
+        function form_set_ant_rot() {
+            let azimuth = $("#form_ant_rot_azimuth").val();
+            let elevation = $("#form_ant_rot_elevation").val();
+
+            $.ajax({
+                url: '{{ url_for("route_api_ham_ant_rotator") }}',
+                type: "POST",
+                data: JSON.stringify({
+                    azimuth: azimuth,
+                    elevation: elevation,
+                }),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function () {
+
+                }
+            });
+
+            Toastify({
+                text: "Set Antenna Rotator: Azimuth=" + azimuth + ", Elevation=" + elevation,
+                position: "center",
+                gravity: "bottom",
+                duration: 5000,
+                style: {
+                    background: "blue",
+                },
+            }).showToast();
+
+        }
+
+    </script>
+
     <p>This page is for tbd.</p>
 
     <h3>Page Control</h3>
@@ -75,6 +109,8 @@
     </ul>
 
     <h3>Antenna Rotator</h3>
+
+    <h4>Overview</h4>
 
     <table class="tab-content">
         <tr>
@@ -90,6 +126,33 @@
             <td><label id="lbl_ant_rot_elevation">tbd</label></td>
         </tr>
     </table>
+
+    <h4>Control</h4>
+
+    <form action="javascript:form_set_ant_rot()">
+
+        <table class="tab-content">
+            <tr>
+                <td>Azimuth (Degree)</td>
+                <td><input type="text" class="input-same-width"
+                           id="form_ant_rot_azimuth"
+                           name="form_ant_rot_azimuth"
+                           value="0"></td>
+            </tr>
+            <tr>
+                <td>Elevation (Degree)</td>
+                <td><input type="text" class="input-same-width"
+                           id="form_ant_rot_elevation"
+                           name="form_ant_rot_elevation"
+                           value="0"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Set"></td>
+            </tr>
+        </table>
+
+    </form>
 
     <h3>Radio</h3>
     <table class="tab-content">
