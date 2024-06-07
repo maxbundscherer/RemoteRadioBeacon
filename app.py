@@ -52,7 +52,7 @@ def route_about():
 @app.route('/api/test')
 def route_api_test():
     return jsonify(
-        test_service.get_test_items()
+        test_service.get_test_item()
     )
 
 
