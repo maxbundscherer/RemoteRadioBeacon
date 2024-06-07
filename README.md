@@ -10,6 +10,7 @@ Tested on ...
 - Run `conda activate py311RemoteBeacon`
 - Run `pip install -r requirements.txt`
 - Edit `config.json` to match your setup
+- Add your own transmission file `transmit.wav`
 
 ## Start
 
