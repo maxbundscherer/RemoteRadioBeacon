@@ -104,8 +104,17 @@ def route_api_test():
     )
 
 
-@app.route('/api/ham/ant_rotator')
+@app.route('/api/ham/ant_rotator', methods=["GET", "POST"])
 def route_api_ham_ant_rotator():
+    if request.method == 'POST':
+        content = request.get_json()
+
+        if 'azimuth' in content:
+            ham_service.set_ant_rotator_azimuth(content['azimuth'])
+
+        if 'elevation' in content:
+            ham_service.set_ant_rotator_elevation(content['elevation'])
+
     return jsonify(
         ham_service.get_ant_rotator_state()
     )

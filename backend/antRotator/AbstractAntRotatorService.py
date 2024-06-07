@@ -25,6 +25,12 @@ class AbstractAntRotatorService:
         self._trigger_update_state()
         return self._state
 
+    def set_azimuth(self, azimuth: float):
+        raise NotImplementedError("Method must be implemented in derived classes.")
+
+    def set_elevation(self, elevation: float):
+        raise NotImplementedError("Method must be implemented in derived classes.")
+
     @staticmethod
     def _startup_test() -> bool:
         raise NotImplementedError("Method must be implemented in derived classes.")

@@ -16,3 +16,11 @@ class DummyAntRotatorService(AbstractAntRotatorService):
             elevation=round(random.uniform(0, 90), 2),
             last_updated=TimeUtil.get_current_time_utc_str()
         )
+
+    def set_azimuth(self, azimuth: float):
+        print("WARNING: DummyAntRotatorService.set_azimuth() called. Ignoring.")
+        print("SHOULD SET AZIMUTH TO: ", azimuth)
+
+    def set_elevation(self, elevation: float):
+        print("WARNING: DummyAntRotatorService.set_elevation() called. Ignoring.")
+        print("SHOULD SET ELEVATION TO: ", elevation)

@@ -24,5 +24,11 @@ class HamService:
     def get_ant_rotator_state(self) -> AntRotatorState:
         return self._ant_rotator_service.get_state()
 
+    def set_ant_rotator_azimuth(self, azimuth: float):
+        self._ant_rotator_service.set_azimuth(azimuth)
+
+    def set_ant_rotator_elevation(self, elevation: float):
+        self._ant_rotator_service.set_elevation(elevation)
+
     def get_radio_state(self) -> RadioState:
         return self._radio_control_service.get_state()
