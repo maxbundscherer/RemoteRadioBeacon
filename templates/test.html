@@ -13,6 +13,7 @@
                 success: function (data) {
                     $("#lbl_name").text(data["name"]);
                     $("#lbl_description").text(data["description"]);
+                    $("#lbl_int").text(data["test_int"]);
                     $("#lbl_created_at").text(data["created_at"]);
                 }
             });
@@ -42,6 +43,7 @@
     <ul>
         <li>Name: <label id="lbl_name">tbd</label></li>
         <li>Description: <label id="lbl_description">tbd</label></li>
+        <li>Test-Int: <label id="lbl_int">tbd</label></li>
         <li>Created at: <label id="lbl_created_at">tbd</label></li>
     </ul>
 
