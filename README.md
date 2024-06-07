@@ -4,6 +4,15 @@ An application to remotely rotate the antenna, set transmission parameters and t
 
 Tested on ...
 
+## Preview
+
+<table>
+    <tr>
+        <td><img src="images/prev1.png" height="200px"></td>
+        <td><img src="images/prev2.png" height="200px"></td>
+    </tr>
+</table>
+
 ## Installation
 
 - Run `conda create --name py311RemoteBeacon python=3.11`
