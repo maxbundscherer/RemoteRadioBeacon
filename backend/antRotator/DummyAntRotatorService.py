@@ -12,7 +12,7 @@ class DummyAntRotatorService(AbstractAntRotatorService):
 
     def _trigger_update_state(self):
         self._state = AntRotatorState(
-            azimuth=random.uniform(0, 360),
-            elevation=random.uniform(0, 90),
+            azimuth=round(random.uniform(0, 360), 2),
+            elevation=round(random.uniform(0, 90), 2),
             last_updated=TimeUtil.get_current_time_utc_str()
         )

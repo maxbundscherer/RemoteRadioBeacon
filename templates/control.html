@@ -8,8 +8,8 @@
             $.ajax({
                 url: "{{ url_for("route_api_ham_ant_rotator") }}",
                 success: function (data) {
-                    $("#lbl_ant_rot_azimuth").text(Math.round(data["azimuth"] * 100) / 100);
-                    $("#lbl_ant_rot_elevation").text(Math.round(data["elevation"] * 100) / 100);
+                    $("#lbl_ant_rot_azimuth").text(data["azimuth"]);
+                    $("#lbl_ant_rot_elevation").text(data["elevation"]);
                     $("#lbl_ant_rot_last_updated").text(data["last_updated"]);
                 }
             });
