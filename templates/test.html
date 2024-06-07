@@ -3,13 +3,31 @@
 {% block content %}
 
     <script>
-        function testfun() {
-            alert('test');
+        function test_function() {
+
+            $.ajax({
+                url: "{{ url_for("route_api_test") }}",
+                {#type: "GET",#}
+                {#dataType: "json",#}
+                {#contentType: "application/json; charset=utf-8",#}
+                success: function (data) {
+                    $("#lbl_name").text(data["name"]);
+                    $("#lbl_description").text(data["description"]);
+                    $("#lbl_created_at").text(data["created_at"]);
+                }
+            });
+
         }
     </script>
 
     <p>
-        <a href="javascript:testfun()">Click me</a>
+        <a href="javascript:test_function()">Click me</a>
     </p>
+
+    <ul>
+        <li>Name: <label id="lbl_name">tbd</label></li>
+        <li>Description: <label id="lbl_description">tbd</label></li>
+        <li>Created at: <label id="lbl_created_at">tbd</label></li>
+    </ul>
 
 {% endblock %}
