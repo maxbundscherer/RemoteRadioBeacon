@@ -96,6 +96,47 @@
 
         }
 
+        function form_radio_start_tx() {
+
+            $.ajax({
+                url: '{{ url_for("route_api_ham_radio_start_tx") }}',
+                type: "POST",
+                success: function () {
+                    Toastify({
+                        text: "Start Transmitting",
+                        position: "center",
+                        gravity: "bottom",
+                        duration: 5000,
+                        style: {
+                            background: "blue",
+                        },
+                    }).showToast();
+                }
+            });
+
+
+        }
+
+        function form_radio_stop_tx() {
+
+            $.ajax({
+                url: '{{ url_for("route_api_ham_radio_stop_tx") }}',
+                type: "POST",
+                success: function () {
+                    Toastify({
+                        text: "Stop Transmitting",
+                        position: "center",
+                        gravity: "bottom",
+                        duration: 5000,
+                        style: {
+                            background: "blue",
+                        },
+                    }).showToast();
+                }
+            });
+
+        }
+
     </script>
 
     <p>This page is for tbd.</p>
@@ -155,6 +196,9 @@
     </form>
 
     <h3>Radio</h3>
+
+    <h4>Overview</h4>
+
     <table class="tab-content">
         <tr>
             <td>Last Updated (UTC)</td>
@@ -178,6 +222,12 @@
         </tr>
     </table>
 
+    <h4>Control</h4>
+
+    <ul>
+        <li><a href="javascript:form_radio_start_tx()">Start Transmitting</a></li>
+        <li><a href="javascript:form_radio_stop_tx()">Stop Transmitting</a></li>
+    </ul>
 
 
     <script>

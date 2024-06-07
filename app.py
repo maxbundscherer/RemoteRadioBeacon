@@ -115,6 +115,8 @@ def route_api_ham_ant_rotator():
         if 'elevation' in content:
             ham_service.set_ant_rotator_elevation(content['elevation'])
 
+        return "OK"
+
     return jsonify(
         ham_service.get_ant_rotator_state()
     )
@@ -125,6 +127,18 @@ def route_api_ham_radio():
     return jsonify(
         ham_service.get_radio_state()
     )
+
+
+@app.route('/api/ham/radio/start_tx', methods=["POST"])
+def route_api_ham_radio_start_tx():
+    ham_service.start_radio_tx()
+    return "OK"
+
+
+@app.route('/api/ham/radio/stop_tx', methods=["POST"])
+def route_api_ham_radio_stop_tx():
+    ham_service.stop_radio_tx()
+    return "OK"
 
 
 if __name__ == '__main__':

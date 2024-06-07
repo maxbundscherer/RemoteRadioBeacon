@@ -10,12 +10,12 @@ class HamService:
     def __init__(self, config_service: ConfigService):
 
         if config_service.get_config().ant_rotator_service == 'DummyService':
-            self._ant_rotator_service: AbstractAntRotatorService = DummyAntRotatorService()
+            self._ant_rotator_service: AbstractAntRotatorService = DummyAntRotatorService(config_service)
         else:
             raise Exception("Unknown AntRotatorService", config_service.get_config().ant_rotator_service)
 
         if config_service.get_config().radio_control_service == 'DummyService':
-            self._radio_control_service: AbstractRadioControlService = DummyRadioControlService()
+            self._radio_control_service: AbstractRadioControlService = DummyRadioControlService(config_service)
         else:
             raise Exception("Unknown RadioControlService", config_service.get_config().radio_control_service)
 
@@ -32,3 +32,9 @@ class HamService:
 
     def get_radio_state(self) -> RadioState:
         return self._radio_control_service.get_state()
+
+    def start_radio_tx(self):
+        self._radio_control_service.start_transmit()
+
+    def stop_radio_tx(self):
+        self._radio_control_service.stop_transmit()
