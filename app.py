@@ -1,8 +1,10 @@
 from flask import Flask, render_template, url_for, jsonify, request
 
+from backend.ConfigService import ConfigService
 from backend.HamService import HamService
 from backend.TestService import TestService
 
+config_service: ConfigService = ConfigService()
 test_service: TestService = TestService()
 ham_service: HamService = HamService()
 
