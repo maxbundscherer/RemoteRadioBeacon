@@ -1,3 +1,5 @@
 {
-  "tx_locator": "JN59"
+  "tx_locator": "JN59",
+  "ant_rotator_service": "DummyService",
+  "radio_control_service": "DummyService"
 }

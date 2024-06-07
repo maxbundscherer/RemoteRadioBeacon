@@ -13,7 +13,7 @@ class ConfigService:
     @staticmethod
     def get_app_title() -> str:
         return ConfigService.C_APP_TITLE
-    
+
     @staticmethod
     def get_app_version() -> str:
         return ConfigService.C_APP_VERSION
@@ -22,6 +22,8 @@ class ConfigService:
     @dataclass
     class Config:
         tx_locator: str
+        ant_rotator_service: str
+        radio_control_service: str
 
     # @staticmethod
     # def to_json_file(config: Config, fp: str):

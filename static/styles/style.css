@@ -32,10 +32,18 @@ a {
 .input-same-width {
     /*margin: 0;*/
     /*padding: 0;*/
-    width: 100px;
+    /*width: 150px;*/
+    width: 80%;
 }
 
+
 .tab-content {
-    width: 100%;
-    max-width: 300px;
+    width: 80%;
+    /*border: 2px solid black;*/
+    max-width: 400px;
+}
+
+/*Set inner borders too to td and tr*/
+.tab-content td, .tab-content tr {
+    border: 1px solid #9a9a9a;
 }

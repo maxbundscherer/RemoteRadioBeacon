@@ -1,3 +1,4 @@
+from backend.ConfigService import ConfigService
 from backend.antRotator.AbstractAntRotatorService import AbstractAntRotatorService, AntRotatorState
 from backend.antRotator.DummyAntRotatorService import DummyAntRotatorService
 from backend.radioControl.AbstractRadioControlService import AbstractRadioControlService, RadioState
@@ -6,9 +7,17 @@ from backend.radioControl.DummyRadioControlService import DummyRadioControlServi
 
 class HamService:
 
-    def __init__(self):
-        self._ant_rotator_service: AbstractAntRotatorService = DummyAntRotatorService()
-        self._radio_control_service: AbstractRadioControlService = DummyRadioControlService()
+    def __init__(self, config_service: ConfigService):
+
+        if config_service.get_config().ant_rotator_service == 'DummyService':
+            self._ant_rotator_service: AbstractAntRotatorService = DummyAntRotatorService()
+        else:
+            raise Exception("Unknown AntRotatorService", config_service.get_config().ant_rotator_service)
+
+        if config_service.get_config().radio_control_service == 'DummyService':
+            self._radio_control_service: AbstractRadioControlService = DummyRadioControlService()
+        else:
+            raise Exception("Unknown RadioControlService", config_service.get_config().radio_control_service)
 
         print("- HamService initialized.")
 

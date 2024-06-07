@@ -6,7 +6,7 @@ from backend.TestService import TestService
 
 config_service: ConfigService = ConfigService()
 test_service: TestService = TestService()
-ham_service: HamService = HamService()
+ham_service: HamService = HamService(config_service=config_service)
 
 app = Flask(
     __name__
@@ -26,8 +26,11 @@ def route_index():
     page_html += "<h3>Overview</h3>"
     page_html += '<table class="tab-content">'
     page_html += f'<tr><td>Startup Time</td><td>{config_service.get_startup_time()}</td></tr>'
-    page_html += '<tr><td></td><td></td></tr>'
+    page_html += '<tr><td><br></td><td></td></tr>'
     page_html += f'<tr><td>TX Locator</td><td>{config_service.get_config().tx_locator}</td></tr>'
+    page_html += '<tr><td><br></td><td></td></tr>'
+    page_html += f'<tr><td>Ant Rotator</td><td>{config_service.get_config().ant_rotator_service}</td></tr>'
+    page_html += f'<tr><td>Radio Control</td><td>{config_service.get_config().radio_control_service}</td></tr>'
     page_html += '</table>'
     return render_template('simple_html.html',
                            site_app_title=config_service.get_app_title(),
