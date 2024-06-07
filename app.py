@@ -27,11 +27,21 @@ def route_index():
                            )
 
 
-@app.route('/control')
+@app.route('/control', methods=['GET', 'POST'])
 def route_control():
-    return render_template('simple_content.html',
+    if request.method == 'POST':
+        data = request.get_data()
+        print(data)
+        print(request.form['description'])
+        test_service.set_test_description(
+            request.form['description']
+        )
+        test_service.set_test_int(
+            int(request.form['test_int'])
+        )
+        
+    return render_template('control.html',
                            site_title='Control',
-                           page_content='Hello World!',
                            )
 
 

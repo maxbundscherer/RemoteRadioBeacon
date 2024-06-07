@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <script>
+        function test_function() {
+
+            $.ajax({
+                url: "{{ url_for("route_api_test") }}",
+                {#type: "GET",#}
+                {#dataType: "json",#}
+                {#contentType: "application/json; charset=utf-8",#}
+                success: function (data) {
+                    $("#lbl_name").text(data["name"]);
+                    $("#lbl_description").text(data["description"]);
+                    $("#lbl_int").text(data["test_int"]);
+                    $("#lbl_created_at").text(data["created_at"]);
+                }
+            });
+
+        }
+
+        var background_interval = -1;
+
+        function start_test() {
+            background_interval = window.setInterval(function () {
+                test_function();
+            }, 1000);
+        }
+
+        function stop_test() {
+            window.clearInterval(background_interval);
+        }
+
+    </script>
+
+    <p>This page is for tbd.</p>
+
+    <h3>Get Test</h3>
+
+    <ul>
+        <li><a href="javascript:test_function()">Manual</a></li>
+        <li><a href="javascript:start_test()">Start</a></li>
+        <li><a href="javascript:stop_test()">Stop</a></li>
+    </ul>
+
+    <table class="tab-content">
+        <tr>
+            <td>Name</td>
+            <td><label id="lbl_name">tbd</label></td>
+        </tr>
+        <tr>
+            <td>Description</td>
+            <td><label id="lbl_description">tbd</label></td>
+        </tr>
+        <tr>
+            <td>Test-Int</td>
+            <td><label id="lbl_int">tbd</label></td>
+        </tr>
+        <tr>
+            <td>Created at</td>
+            <td><label id="lbl_created_at">tbd</label></td>
+        </tr>
+    </table>
+
+    <h3>Post Test</h3>
+
+    <form action="{{ url_for('route_control') }}" method="post" enctype="multipart/form-data">
+
+        <table class="tab-content">
+            <tr>
+                <td>Description</td>
+                <td><input type="text" class="input-same-width" id="description" name="description" value="tbd"></td>
+            </tr>
+            <tr>
+                <td>Test-Int</td>
+                <td><input type="number" class="input-same-width" id="test_int" name="test_int" value="0"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Submit"></td>
+            </tr>
+        </table>
+
+    </form>
+
+    <script>
+        start_test();
+    </script>
+
+{% endblock %}
