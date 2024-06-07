@@ -29,8 +29,13 @@ a {
     color: #801919;
 }
 
-.input_same_width {
+.input-same-width {
     /*margin: 0;*/
     /*padding: 0;*/
-    width: 400px;
+    width: 100px;
+}
+
+.tab-content {
+    width: 100%;
+    max-width: 300px;
 }

@@ -34,27 +34,54 @@
 
     </script>
 
+    <p>This page is for testing the user interface and the operating concept.</p>
+
+    <h3>Get Test</h3>
+
     <ul>
         <li><a href="javascript:test_function()">Manual</a></li>
         <li><a href="javascript:start_test()">Start</a></li>
         <li><a href="javascript:stop_test()">Stop</a></li>
     </ul>
 
-    <ul>
-        <li>Name: <label id="lbl_name">tbd</label></li>
-        <li>Description: <label id="lbl_description">tbd</label></li>
-        <li>Test-Int: <label id="lbl_int">tbd</label></li>
-        <li>Created at: <label id="lbl_created_at">tbd</label></li>
-    </ul>
+    <table class="tab-content">
+        <tr>
+            <td>Name</td>
+            <td><label id="lbl_name">tbd</label></td>
+        </tr>
+        <tr>
+            <td>Description</td>
+            <td><label id="lbl_description">tbd</label></td>
+        </tr>
+        <tr>
+            <td>Test-Int</td>
+            <td><label id="lbl_int">tbd</label></td>
+        </tr>
+        <tr>
+            <td>Created at</td>
+            <td><label id="lbl_created_at">tbd</label></td>
+        </tr>
+    </table>
+
+    <h3>Post Test</h3>
 
     <form action="{{ url_for('route_test') }}" method="post" enctype="multipart/form-data">
-        <label for="description">Description:</label>
-        <input type="text" id="description" name="description" value="tbd">
-        <br>
-        <label for="test_int">Test-Int:</label>
-        <input type="number" id="test_int" name="test_int" value="0">
-        <br>
-        <input type="submit" value="Submit">
+
+        <table class="tab-content">
+            <tr>
+                <td>Description</td>
+                <td><input type="text" class="input-same-width" id="description" name="description" value="tbd"></td>
+            </tr>
+            <tr>
+                <td>Test-Int</td>
+                <td><input type="number" class="input-same-width" id="test_int" name="test_int" value="0"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Submit"></td>
+            </tr>
+        </table>
+
     </form>
 
     <script>
