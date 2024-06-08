@@ -3,6 +3,10 @@
 {% block content %}
 
     <script>
+
+        var is_first_refresh_ant_rotator = true;
+        var is_first_refresh_radio = true;
+
         function refresh() {
 
             $.ajax({
@@ -11,6 +15,12 @@
                     $("#lbl_ant_rot_azimuth").text(data["azimuth"]);
                     $("#lbl_ant_rot_elevation").text(data["elevation"]);
                     $("#lbl_ant_rot_last_updated").text(data["last_updated"]);
+
+                    if (is_first_refresh_ant_rotator) {
+                        $("#form_ant_rot_azimuth").val(data["azimuth"]);
+                        $("#form_ant_rot_elevation").val(data["elevation"]);
+                        is_first_refresh_ant_rotator = false;
+                    }
                 }
             });
 
@@ -22,6 +32,11 @@
                     $("#lbl_radio_mode").text(data["mode"]);
                     $("#lbl_radio_is_transmitting").text(data["is_transmitting"]);
                     $("#lbl_radio_last_updated").text(data["last_updated"]);
+
+                    if (is_first_refresh_radio) {
+                        is_first_refresh_radio = false;
+                    }
+
                 }
             });
 
