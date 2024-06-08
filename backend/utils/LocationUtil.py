@@ -24,6 +24,10 @@ class LocationUtil:
         )
 
     @staticmethod
+    def coordinates_to_maidenhead(loc: Coordinate) -> str:
+        return mh.to_maiden(loc.latitude, loc.longitude)
+
+    @staticmethod
     def calc_distance_azimuth(loc_0: Coordinate, loc_1: Coordinate) -> DistanceAzimuth:
         eod = Geod(ellps="WGS84")
 
@@ -41,6 +45,11 @@ class LocationUtil:
 if __name__ == '__main__':
     # gps_0: LocationUtil.Coordinate = LocationUtil.maidenhead_to_coordinates("JN59NK18")
     gps_0: LocationUtil.Coordinate = LocationUtil.Coordinate(latitude=49.452833, longitude=11.094333)
+
+    maid_0 = LocationUtil.coordinates_to_maidenhead(gps_0)
+
+    print(maid_0)
+
     gps_1: LocationUtil.Coordinate = LocationUtil.maidenhead_to_coordinates("JN58SD15")
 
     print(gps_0)
