@@ -29,6 +29,12 @@ a {
     color: #801919;
 }
 
+#map {
+    width: 90%;
+    max-width: 400px;
+    height: 400px;
+}
+
 .input-same-width {
     /*margin: 0;*/
     /*padding: 0;*/
