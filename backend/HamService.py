@@ -36,6 +36,9 @@ class HamService:
     def set_radio_frequency(self, frequency: int):
         self._radio_control_service.set_frequency(frequency)
 
+    def set_radio_power(self, power: int):
+        self._radio_control_service.set_power(power)
+
     def start_radio_tx(self):
         self._radio_control_service.start_transmit()
 

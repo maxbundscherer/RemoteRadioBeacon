@@ -35,6 +35,7 @@
 
                     if (is_first_refresh_radio) {
                         $("#form_radio_frequency").val(data["frequency"]);
+                        $("#form_radio_power").val(data["power"]);
                         is_first_refresh_radio = false;
                     }
 
@@ -156,6 +157,34 @@
 
             Toastify({
                 text: "Set Radio: Frequency=" + frequency,
+                position: "center",
+                gravity: "bottom",
+                duration: 5000,
+                style: {
+                    background: "blue",
+                },
+            }).showToast();
+
+        }
+
+        function form_radio_set_power() {
+            let power = $("#form_radio_power").val();
+
+            $.ajax({
+                url: '{{ url_for("route_api_ham_radio") }}',
+                type: "POST",
+                data: JSON.stringify({
+                    power: power,
+                }),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function () {
+
+                }
+            });
+
+            Toastify({
+                text: "Set Radio: Power=" + power,
                 position: "center",
                 gravity: "bottom",
                 duration: 5000,
@@ -309,6 +338,19 @@
                 <td><input type="text" class="input-same-width"
                            id="form_radio_frequency"
                            name="form_radio_frequency"
+                           value="0"></td>
+                <td><input type="submit" value="Set"></td>
+            </tr>
+        </table>
+    </form>
+
+    <form action="javascript:form_radio_set_power()">
+        <table class="tab-content">
+            <tr>
+                <td class="tab-first-col">Power (%)</td>
+                <td><input type="text" class="input-same-width"
+                           id="form_radio_power"
+                           name="form_radio_power"
                            value="0"></td>
                 <td><input type="submit" value="Set"></td>
             </tr>

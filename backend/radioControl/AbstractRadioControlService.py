@@ -34,6 +34,9 @@ class AbstractRadioControlService:
     def set_frequency(self, frequency: int):
         raise NotImplementedError("Method must be implemented in derived classes.")
 
+    def set_power(self, power: int):
+        raise NotImplementedError("Method must be implemented in derived classes.")
+
     def start_transmit(self):
         raise NotImplementedError("Method must be implemented in derived classes.")
 

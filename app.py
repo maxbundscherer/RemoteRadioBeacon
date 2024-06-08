@@ -129,6 +129,9 @@ def route_api_ham_radio():
         if 'frequency' in content:
             ham_service.set_radio_frequency(int(content['frequency']))
 
+        if 'power' in content:
+            ham_service.set_radio_power(int(content['power']))
+
         return "OK"
 
     return jsonify(
