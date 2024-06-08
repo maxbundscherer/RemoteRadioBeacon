@@ -416,6 +416,16 @@
                     renew_map(data["latitude"], data["longitude"]);
 
                     $("#form_ant_rot_azimuth").val(data["azimuth"]);
+
+                    Toastify({
+                        text: "Calculated Ant-Parameters",
+                        position: "center",
+                        gravity: "bottom",
+                        duration: 5000,
+                        style: {
+                            background: "orange",
+                        },
+                    }).showToast();
                 }
             });
 
@@ -443,6 +453,16 @@
                     renew_map(data["latitude"], data["longitude"]);
 
                     $("#form_ant_rot_azimuth").val(data["azimuth"]);
+
+                    Toastify({
+                        text: "Calculated Ant-Parameters",
+                        position: "center",
+                        gravity: "bottom",
+                        duration: 5000,
+                        style: {
+                            background: "orange",
+                        },
+                    }).showToast();
                 }
             });
 

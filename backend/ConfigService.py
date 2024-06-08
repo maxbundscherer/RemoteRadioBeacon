@@ -9,7 +9,7 @@ import librosa
 
 class ConfigService:
     C_APP_TITLE = 'RemoteBeacon'
-    C_APP_VERSION = '0.0.3'
+    C_APP_VERSION = '0.0.4'
     C_LOCAL_FILE = 'config.json'
 
     C_LOCAL_WAV_TX_FILE = 'transmit.wav'
