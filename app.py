@@ -28,6 +28,8 @@ def route_index():
     page_html += f'<tr><td>Startup Time</td><td>{config_service.get_startup_time()}</td></tr>'
     page_html += '<tr><td><br></td><td></td></tr>'
     page_html += f'<tr><td>TX Locator</td><td>{config_service.get_config().tx_locator}</td></tr>'
+    page_html += f'<tr><td>TX Latitude</td><td>{config_service.get_config().tx_latitude}</td></tr>'
+    page_html += f'<tr><td>TX Longitude</td><td>{config_service.get_config().tx_longitude}</td></tr>'
     page_html += '<tr><td><br></td><td></td></tr>'
     page_html += f'<tr><td>Ant Rotator</td><td>{config_service.get_config().ant_rotator_service}</td></tr>'
     page_html += f'<tr><td>Radio Control</td><td>{config_service.get_config().radio_control_service}</td></tr>'
@@ -35,11 +37,14 @@ def route_index():
     page_html += f'<tr><td>TX-Wav Sampling-Rate (Hz)</td><td>{config_service.get_local_wav_tx_sr()}</td></tr>'
     page_html += f'<tr><td>TX-Wav Duration (sec)</td><td>{config_service.get_local_wav_tx_duration()}</td></tr>'
     page_html += '</table>'
-    return render_template('simple_html.html',
+    return render_template('simple_html_with_map.html',
                            site_app_title=config_service.get_app_title(),
                            site_app_version=config_service.get_app_version(),
                            site_title='Home',
                            page_html=page_html,
+                           page_tx_latitude=config_service.get_config().tx_latitude,
+                           page_tx_longitude=config_service.get_config().tx_longitude,
+                           page_marker_name='TX',
                            )
 
 
