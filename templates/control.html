@@ -296,7 +296,53 @@
         </tr>
     </table>
 
-    <h4>Map</h4>
+    <h4>RX-Calculator</h4>
+
+    <p>Automatically calculates the parameters for the <i>Control</i> section.<br>Displays the information and
+        position on a map.</p>
+
+    <form>
+        <table class="tab-content">
+            <tr>
+                <td class="tab-first-col">Maidenhead</td>
+                <td class="tab-second-col"><input type="text" class="input-same-width"
+                                                  id="form_calc_maidenhead"
+                                                  name="form_calc_maidenhead"
+                                                  value="{{ page_tx_maidenhead }}"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Calculate on Locator"></td>
+            </tr>
+        </table>
+    </form>
+
+    <br>
+
+    <form>
+        <table class="tab-content">
+            <tr>
+                <td class="tab-first-col">GPS Latitude</td>
+                <td class="tab-second-col"><input type="text" class="input-same-width"
+                                                  id="form_calc_gps_lat"
+                                                  name="form_calc_gps_lat"
+                                                  value="{{ page_tx_latitude }}"></td>
+            </tr>
+            <tr>
+                <td class="tab-first-col">GPS Longitude</td>
+                <td class="tab-second-col"><input type="text" class="input-same-width"
+                                                  id="form_calc_gps_lon"
+                                                  name="form_calc_gps_lon"
+                                                  value="{{ page_tx_longitude }}"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Calculate on Lat/Lon"></td>
+            </tr>
+        </table>
+    </form>
+
+    <p>RX-Distance: <label id="lbl_calc_rx_distance">0</label> km</p>
 
     <link rel="stylesheet" href="{{ url_for('static',filename='styles/leaflet.css') }}"/>
     <div id="map"></div>
