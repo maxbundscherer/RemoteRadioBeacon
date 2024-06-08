@@ -109,10 +109,10 @@ def route_api_ham_ant_rotator():
         content = request.get_json()
 
         if 'azimuth' in content:
-            ham_service.set_ant_rotator_azimuth(content['azimuth'])
+            ham_service.set_ant_rotator_azimuth(float(content['azimuth']))
 
         if 'elevation' in content:
-            ham_service.set_ant_rotator_elevation(content['elevation'])
+            ham_service.set_ant_rotator_elevation(float(content['elevation']))
 
         return "OK"
 
