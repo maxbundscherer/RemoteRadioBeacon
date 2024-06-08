@@ -2,7 +2,16 @@
 
 An application to remotely rotate the antenna, set transmission parameters and transmit.
 
-Tested on ...
+Tested on ... (Kenwood TS-2000, HyGain DCU3, Raspberry Pi 4)
+
+## Features
+
+- Control and display of antenna rotor parameters
+- Control and display of parameters of a radio
+- Calculate the antenna parameters (azimuth and distance) based on GPS coordinates or the Maidenhead locator.
+- Web interface for remote control (Flask)
+- Multiple antenna rotors and radios supported (based on hamlib)
+- Remote transmission of a wav file
 
 ## Preview
 
