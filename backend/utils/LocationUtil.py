@@ -39,7 +39,8 @@ class LocationUtil:
 
 
 if __name__ == '__main__':
-    gps_0: LocationUtil.Coordinate = LocationUtil.maidenhead_to_coordinates("JN59NK18")
+    # gps_0: LocationUtil.Coordinate = LocationUtil.maidenhead_to_coordinates("JN59NK18")
+    gps_0: LocationUtil.Coordinate = LocationUtil.Coordinate(latitude=49.452833, longitude=11.094333)
     gps_1: LocationUtil.Coordinate = LocationUtil.maidenhead_to_coordinates("JN58SD15")
 
     print(gps_0)
