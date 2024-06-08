@@ -36,6 +36,7 @@
                     if (is_first_refresh_radio) {
                         $("#form_radio_frequency").val(data["frequency"]);
                         $("#form_radio_power").val(data["power"]);
+                        $("#form_radio_mode").val(data["mode"]);
                         is_first_refresh_radio = false;
                     }
 
@@ -185,6 +186,34 @@
 
             Toastify({
                 text: "Set Radio: Power=" + power,
+                position: "center",
+                gravity: "bottom",
+                duration: 5000,
+                style: {
+                    background: "blue",
+                },
+            }).showToast();
+
+        }
+
+        function form_radio_set_mode() {
+            let mode = $("#form_radio_mode").val();
+
+            $.ajax({
+                url: '{{ url_for("route_api_ham_radio") }}',
+                type: "POST",
+                data: JSON.stringify({
+                    mode: mode,
+                }),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function () {
+
+                }
+            });
+
+            Toastify({
+                text: "Set Radio: Mode=" + mode,
                 position: "center",
                 gravity: "bottom",
                 duration: 5000,
@@ -352,6 +381,27 @@
                            id="form_radio_power"
                            name="form_radio_power"
                            value="0"></td>
+                <td><input type="submit" value="Set"></td>
+            </tr>
+        </table>
+    </form>
+
+    <form action="javascript:form_radio_set_mode()">
+        <table class="tab-content">
+            <tr>
+                <td class="tab-first-col">Mode</td>
+                <td>
+                    <select
+                            class="input-same-width"
+                            name="form_radio_mode"
+                            id="form_radio_mode">
+                        <option value="AM">AM</option>
+                        <option value="FM">FM</option>
+                        <option value="USB">USB</option>
+                        <option value="LSB">LSB</option>
+                        <option value="CW">CW</option>
+                    </select>
+                </td>
                 <td><input type="submit" value="Set"></td>
             </tr>
         </table>

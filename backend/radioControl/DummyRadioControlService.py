@@ -27,6 +27,10 @@ class DummyRadioControlService(AbstractRadioControlService):
         print("WARNING: DummyRadioControlService.set_power() called. Ignoring.")
         print("SHOULD SET POWER TO", power)
 
+    def set_mode(self, mode: str):
+        print("WARNING: DummyRadioControlService.set_mode() called. Ignoring.")
+        print("SHOULD SET MODE TO", mode)
+
     def start_transmit(self):
         print("WARNING: DummyRadioControlService.start_transmit() called. Ignoring.")
         print("SHOULD START TRANSMITTING")
