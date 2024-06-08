@@ -74,8 +74,8 @@ class HamService:
         return HamService.RxAntParams(
             latitude=gps_1.latitude,
             longitude=gps_1.longitude,
-            distance=da.distance,
-            azimuth=da.azimuth
+            distance=round(da.distance, 3),
+            azimuth=round(da.azimuth, 2)
         )
 
     def calc_rx_ant_params_mai(self, maidenhead: str) -> RxAntParams:
@@ -90,6 +90,6 @@ class HamService:
         return HamService.RxAntParams(
             latitude=gps_1.latitude,
             longitude=gps_1.longitude,
-            distance=da.distance,
-            azimuth=da.azimuth
+            distance=round(da.distance, 3),
+            azimuth=round(da.azimuth, 2)
         )
