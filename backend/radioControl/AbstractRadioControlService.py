@@ -6,7 +6,7 @@ from backend.utils.TimeUtil import TimeUtil
 
 @dataclass
 class RadioState:
-    frequency: float
+    frequency: int
     mode: str
     power: int
     is_transmitting: bool
@@ -30,6 +30,9 @@ class AbstractRadioControlService:
     def get_state(self) -> RadioState:
         self._trigger_update_state()
         return self._state
+
+    def set_frequency(self, frequency: int):
+        raise NotImplementedError("Method must be implemented in derived classes.")
 
     def start_transmit(self):
         raise NotImplementedError("Method must be implemented in derived classes.")

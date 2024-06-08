@@ -121,8 +121,16 @@ def route_api_ham_ant_rotator():
     )
 
 
-@app.route('/api/ham/radio')
+@app.route('/api/ham/radio', methods=['GET', 'POST'])
 def route_api_ham_radio():
+    if request.method == 'POST':
+        content = request.get_json()
+
+        if 'frequency' in content:
+            ham_service.set_radio_frequency(int(content['frequency']))
+
+        return "OK"
+
     return jsonify(
         ham_service.get_radio_state()
     )

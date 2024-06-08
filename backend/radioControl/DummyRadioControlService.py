@@ -19,6 +19,10 @@ class DummyRadioControlService(AbstractRadioControlService):
             last_updated=TimeUtil.get_current_time_utc_str()
         )
 
+    def set_frequency(self, frequency: int):
+        print("WARNING: DummyRadioControlService.set_frequency() called. Ignoring.")
+        print("SHOULD SET FREQUENCY TO", frequency)
+
     def start_transmit(self):
         print("WARNING: DummyRadioControlService.start_transmit() called. Ignoring.")
         print("SHOULD START TRANSMITTING")
