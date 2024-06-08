@@ -60,8 +60,7 @@ def route_control():
                            site_app_title=config_service.get_app_title(),
                            site_app_version=config_service.get_app_version(),
                            site_title='Control',
-                           page_test_int=test_service.get_test_int(),
-                           page_test_description=test_service.get_test_description(),
+                           page_tx_wav_duration=config_service.get_local_wav_tx_duration(),
                            )
 
 

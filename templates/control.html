@@ -165,7 +165,7 @@
 
     </script>
 
-    <p>This page is for tbd.</p>
+    <p>This page is used to display the parameters and to control the antenna and the radio.</p>
 
     <h3>Page Control</h3>
 
@@ -242,7 +242,7 @@
             <td><label id="lbl_radio_frequency">tbd</label></td>
         </tr>
         <tr>
-            <td>Power (W)</td>
+            <td>Power (%)</td>
             <td><label id="lbl_radio_power">tbd</label></td>
         </tr>
         <tr>
@@ -256,6 +256,8 @@
     </table>
 
     <h4>Control</h4>
+
+    <p>The transmission stops automatically {{ page_tx_wav_duration }} seconds after the start of the transmission.</p>
 
     <ul>
         <li><a href="javascript:form_radio_start_tx()">Start Transmitting</a></li>
