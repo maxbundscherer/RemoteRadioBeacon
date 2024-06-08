@@ -150,6 +150,28 @@ def route_api_ham_radio():
     )
 
 
+@app.route('/api/ham/rx_ant_params', methods=["POST"])
+def route_api_ham_rx_ant_params():
+    content = request.get_json()
+
+    if 'latitude' in content and 'longitude' in content:
+        return jsonify(
+            ham_service.calc_rx_ant_params_gps(
+                latitude=float(content['latitude']),
+                longitude=float(content['longitude'])
+            )
+        )
+
+    if 'maidenhead' in content:
+        return jsonify(
+            ham_service.calc_rx_ant_params_mai(
+                maidenhead=content['maidenhead']
+            )
+        )
+
+    return "ERROR"
+
+
 @app.route('/api/ham/radio/start_tx', methods=["POST"])
 def route_api_ham_radio_start_tx():
     ham_service.start_radio_tx()

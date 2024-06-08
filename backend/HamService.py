@@ -1,11 +1,23 @@
+from dataclasses import dataclass
+
+from dataclasses_json import dataclass_json
+
 from backend.ConfigService import ConfigService
 from backend.antRotator.AbstractAntRotatorService import AbstractAntRotatorService, AntRotatorState
 from backend.antRotator.DummyAntRotatorService import DummyAntRotatorService
 from backend.radioControl.AbstractRadioControlService import AbstractRadioControlService, RadioState
 from backend.radioControl.DummyRadioControlService import DummyRadioControlService
+from backend.utils.LocationUtil import LocationUtil
 
 
 class HamService:
+    @dataclass_json
+    @dataclass
+    class RxAntParams:
+        latitude: float
+        longitude: float
+        distance: float
+        azimuth: float
 
     def __init__(self, config_service: ConfigService):
 
@@ -18,6 +30,8 @@ class HamService:
             self._radio_control_service: AbstractRadioControlService = DummyRadioControlService(config_service)
         else:
             raise Exception("Unknown RadioControlService", config_service.get_config().radio_control_service)
+
+        self._config_service: ConfigService = config_service
 
         print("- HamService initialized.")
 
@@ -47,3 +61,35 @@ class HamService:
 
     def stop_radio_tx(self):
         self._radio_control_service.stop_transmit()
+
+    def calc_rx_ant_params_gps(self, latitude: float, longitude: float) -> RxAntParams:
+
+        gps_0: LocationUtil.Coordinate = LocationUtil.Coordinate(latitude=self._config_service.get_config().tx_latitude,
+                                                                 longitude=self._config_service.get_config().tx_longitude)
+
+        gps_1: LocationUtil.Coordinate = LocationUtil.Coordinate(latitude=latitude, longitude=longitude)
+
+        da: LocationUtil.DistanceAzimuth = LocationUtil.calc_distance_azimuth(gps_0, gps_1)
+
+        return HamService.RxAntParams(
+            latitude=gps_1.latitude,
+            longitude=gps_1.longitude,
+            distance=da.distance,
+            azimuth=da.azimuth
+        )
+
+    def calc_rx_ant_params_mai(self, maidenhead: str) -> RxAntParams:
+
+        gps_0: LocationUtil.Coordinate = LocationUtil.Coordinate(latitude=self._config_service.get_config().tx_latitude,
+                                                                 longitude=self._config_service.get_config().tx_longitude)
+
+        gps_1: LocationUtil.Coordinate = LocationUtil.maidenhead_to_coordinates(maidenhead)
+
+        da: LocationUtil.DistanceAzimuth = LocationUtil.calc_distance_azimuth(gps_0, gps_1)
+
+        return HamService.RxAntParams(
+            latitude=gps_1.latitude,
+            longitude=gps_1.longitude,
+            distance=da.distance,
+            azimuth=da.azimuth
+        )
