@@ -66,6 +66,9 @@ def route_control():
                            site_app_version=config_service.get_app_version(),
                            site_title='Control',
                            page_tx_wav_duration=config_service.get_local_wav_tx_duration(),
+                           page_tx_maidenhead=config_service.get_config().tx_locator,
+                           page_tx_latitude=config_service.get_config().tx_latitude,
+                           page_tx_longitude=config_service.get_config().tx_longitude,
                            )
 
 
