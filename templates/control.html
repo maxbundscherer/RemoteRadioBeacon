@@ -66,15 +66,41 @@
 
     <script>
 
-        function form_set_ant_rot() {
+        function form_set_ant_rot_azimuth() {
             let azimuth = $("#form_ant_rot_azimuth").val();
-            let elevation = $("#form_ant_rot_elevation").val();
 
             $.ajax({
                 url: '{{ url_for("route_api_ham_ant_rotator") }}',
                 type: "POST",
                 data: JSON.stringify({
                     azimuth: azimuth,
+                }),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function () {
+
+                }
+            });
+
+            Toastify({
+                text: "Set Antenna Rotator: Azimuth=" + azimuth,
+                position: "center",
+                gravity: "bottom",
+                duration: 5000,
+                style: {
+                    background: "blue",
+                },
+            }).showToast();
+
+        }
+
+        function form_set_ant_rot_elevation() {
+            let elevation = $("#form_ant_rot_elevation").val();
+
+            $.ajax({
+                url: '{{ url_for("route_api_ham_ant_rotator") }}',
+                type: "POST",
+                data: JSON.stringify({
                     elevation: elevation,
                 }),
                 dataType: "json",
@@ -85,7 +111,7 @@
             });
 
             Toastify({
-                text: "Set Antenna Rotator: Azimuth=" + azimuth + ", Elevation=" + elevation,
+                text: "Set Antenna Rotator: Elevation=" + elevation,
                 position: "center",
                 gravity: "bottom",
                 duration: 5000,
@@ -170,18 +196,26 @@
 
     <h4>Control</h4>
 
-    <form action="javascript:form_set_ant_rot()">
-
+    <form action="javascript:form_set_ant_rot_azimuth()">
         <table class="tab-content">
             <tr>
-                <td>Azimuth (Degree)</td>
+                <td class="tab-first-col">Azimuth (Degree)</td>
                 <td><input type="text" class="input-same-width"
                            id="form_ant_rot_azimuth"
                            name="form_ant_rot_azimuth"
                            value="0"></td>
             </tr>
             <tr>
-                <td>Elevation (Degree)</td>
+                <td></td>
+                <td><input type="submit" value="Set"></td>
+            </tr>
+        </table>
+    </form>
+
+    <form action="javascript:form_set_ant_rot_elevation()">
+        <table class="tab-content">
+            <tr>
+                <td class="tab-first-col">Elevation (Degree)</td>
                 <td><input type="text" class="input-same-width"
                            id="form_ant_rot_elevation"
                            name="form_ant_rot_elevation"
@@ -192,7 +226,6 @@
                 <td><input type="submit" value="Set"></td>
             </tr>
         </table>
-
     </form>
 
     <h3>Radio</h3>
