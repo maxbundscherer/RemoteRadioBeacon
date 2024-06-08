@@ -36,6 +36,8 @@ class ConfigService:
     @dataclass
     class Config:
         tx_locator: str
+        tx_latitude: float
+        tx_longitude: float
         ant_rotator_service: str
         radio_control_service: str
 
@@ -55,6 +57,9 @@ class ConfigService:
 
     def __init__(self):
         self._config: ConfigService.Config = ConfigService.from_json_file(ConfigService.C_LOCAL_FILE)
+        assert self._config.tx_locator is not None
+        assert self._config.tx_latitude is not None
+        assert self._config.tx_longitude is not None
         self._startup_time: str = TimeUtil.get_current_time_utc_str()
 
         # Set wav file properties
