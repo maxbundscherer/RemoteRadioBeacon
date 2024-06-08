@@ -1,4 +1,4 @@
-# RemoteBeacon
+# RemoteRadioBeacon
 
 An application to remotely rotate the antenna, set transmission parameters and transmit.
 
@@ -25,13 +25,13 @@ Tested on ... (Kenwood TS-2000, HyGain DCU3, Raspberry Pi 4)
 
 ## Installation
 
-- Run `conda create --name py311RemoteBeacon python=3.11`
-- Run `conda activate py311RemoteBeacon`
+- Run `conda create --name py311RemoteRadioBeacon python=3.11`
+- Run `conda activate py311RemoteRadioBeacon`
 - Run `pip install -r requirements.txt`
 - Edit `config.json` to match your setup
 - Add your own transmission file `transmit.wav`
 
 ## Start
 
-- `conda activate py311RemoteBeacon`
+- `conda activate py311RemoteRadioBeacon`
 - `./start.sh`
