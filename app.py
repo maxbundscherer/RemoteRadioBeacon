@@ -18,7 +18,7 @@ def route_index():
     page_html = "<p>Please make a selection:</p><ul>"
     for url_title, url_target in [
         ('Control', url_for('route_control')),
-        ('Test-UI', url_for('route_test_ui')),
+        # ('Test-UI', url_for('route_test_ui')),
         ('About', url_for('route_about')),
     ]:
         page_html += f'<li><a href="{url_target}">{url_title}</a></li>'
