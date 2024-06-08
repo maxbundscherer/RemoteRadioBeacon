@@ -11,15 +11,27 @@
     <script src="{{ url_for('static',filename='scripts/leaflet.js') }}"></script>
     <script>
         var map = L.map('map').setView([{{ page_tx_latitude }}, {{ page_tx_longitude }}], 17);
-
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
-
-        L.marker([{{ page_tx_latitude }}, {{ page_tx_longitude }}]).addTo(map)
+        var marker = L.marker([{{ page_tx_latitude }}, {{ page_tx_longitude }}]).addTo(map)
             .bindPopup('{{ page_marker_name }}')
             .openPopup();
+
+        function renew_map(lat, lon) {
+
+            map.setView([lat, lon], 17);
+
+            // Alten Marker entfernen
+            map.removeLayer(marker);
+
+            // Neuen Marker hinzufügen
+            marker = L.marker([lat, lon]).addTo(map)
+                .bindPopup('{{ page_marker_name }}')
+                .openPopup();
+        }
+
     </script>
 
 {% endblock %}
