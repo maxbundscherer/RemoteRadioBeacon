@@ -301,7 +301,7 @@
     <p>Automatically calculates the parameters for the <i>Control</i> section.<br>Displays the information and
         position on a map.</p>
 
-    <form>
+    <form action="javascript:calc_rx_ant_parmas_maidenhead()">
         <table class="tab-content">
             <tr>
                 <td class="tab-first-col">Maidenhead</td>
@@ -381,11 +381,46 @@
             // Alten Marker entfernen
             map.removeLayer(marker);
 
-            // Neuen Marker hinzufügen
+            L.marker([{{ page_tx_latitude }}, {{ page_tx_longitude }}]).addTo(map)
+                .bindPopup('TX')
+                .openPopup();
+
             marker = L.marker([lat, lon]).addTo(map)
                 .bindPopup('RX')
                 .openPopup();
+
+
         }
+    </script>
+
+    <script>
+
+        function calc_rx_ant_parmas_maidenhead() {
+            let maidenhead = $("#form_calc_maidenhead").val();
+
+            $.ajax({
+                url: '{{ url_for("route_api_ham_rx_ant_params") }}',
+                type: "POST",
+                data: JSON.stringify({
+                    maidenhead: maidenhead,
+                }),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    $("#lbl_calc_rx_distance").text(data["distance"]);
+                    $("#lbl_calc_rx_azimuth").text(data["azimuth"]);
+
+                    $("#form_calc_gps_lat").val(data["latitude"]);
+                    $("#form_calc_gps_lon").val(data["longitude"]);
+
+                    renew_map(data["latitude"], data["longitude"]);
+
+                    $("#form_ant_rot_azimuth").val(data["azimuth"]);
+                }
+            });
+
+        }
+
     </script>
 
     <h4>Control</h4>
