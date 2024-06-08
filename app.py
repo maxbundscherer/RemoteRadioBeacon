@@ -93,7 +93,7 @@ def route_about():
                            site_app_title=config_service.get_app_title(),
                            site_app_version=config_service.get_app_version(),
                            site_title='About',
-                           page_content='73 de DD7MB',
+                           page_content='The quick brown fox jumps over the lazy dog - 73 de DD7MB',
                            )
 
 
