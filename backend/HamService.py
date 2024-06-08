@@ -14,6 +14,7 @@ class HamService:
     @dataclass_json
     @dataclass
     class RxAntParams:
+        maidenhead: str
         latitude: float
         longitude: float
         distance: float
@@ -72,6 +73,7 @@ class HamService:
         da: LocationUtil.DistanceAzimuth = LocationUtil.calc_distance_azimuth(gps_0, gps_1)
 
         return HamService.RxAntParams(
+            maidenhead=LocationUtil.coordinates_to_maidenhead(gps_1),
             latitude=gps_1.latitude,
             longitude=gps_1.longitude,
             distance=round(da.distance, 3),
@@ -88,6 +90,7 @@ class HamService:
         da: LocationUtil.DistanceAzimuth = LocationUtil.calc_distance_azimuth(gps_0, gps_1)
 
         return HamService.RxAntParams(
+            maidenhead=maidenhead,
             latitude=gps_1.latitude,
             longitude=gps_1.longitude,
             distance=round(da.distance, 3),
