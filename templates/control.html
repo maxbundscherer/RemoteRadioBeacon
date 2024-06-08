@@ -342,7 +342,24 @@
         </table>
     </form>
 
-    <p>RX-Distance: <label id="lbl_calc_rx_distance">0</label> km</p>
+    <br>
+
+    <table class="tab-content">
+        <tr>
+            <td class="tab-first-col">RX-Distance (km)</td>
+            <td class="tab-second">
+                <label id="lbl_calc_rx_distance">0</label>
+            </td>
+        </tr>
+        <tr>
+            <td class="tab-first-col">RX-Azimuth (Degree)</td>
+            <td class="tab-second">
+                <label id="lbl_calc_rx_azimuth">0</label>
+            </td>
+        </tr>
+    </table>
+
+    <br>
 
     <link rel="stylesheet" href="{{ url_for('static',filename='styles/leaflet.css') }}"/>
     <div id="map"></div>
