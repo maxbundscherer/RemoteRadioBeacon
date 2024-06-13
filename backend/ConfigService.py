@@ -10,9 +10,9 @@ import librosa
 class ConfigService:
     C_APP_TITLE = 'RemoteRadioBeacon'
     C_APP_VERSION = '0.0.4'
-    C_LOCAL_FILE = 'config.json'
+    C_LOCAL_FILE = 'radioresources/config.json'
 
-    C_LOCAL_WAV_TX_FILE = 'transmit.wav'
+    C_LOCAL_WAV_TX_FILE = 'radioresources/transmit.wav'
     C_LOCAL_WAV_TX_SR = -1
     C_LOCAL_WAV_TX_DURATION = -1
 
