@@ -21,8 +21,6 @@
 
         function renew_map(lat, lon) {
 
-            map.setView([lat, lon], 17);
-
             // Alten Marker entfernen
             map.removeLayer(marker);
 
@@ -30,6 +28,8 @@
             marker = L.marker([lat, lon]).addTo(map)
                 .bindPopup('{{ page_marker_name }}')
                 .openPopup();
+
+            map.setView([lat, lon], 15);
         }
     </script>
 

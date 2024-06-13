@@ -1,7 +1,7 @@
 {
   "tx_locator": "JN59NK18",
-  "tx_latitude": 49.452833,
-  "tx_longitude": 11.094333,
+  "tx_latitude": 49.45262,
+  "tx_longitude": 11.09435,
   "ant_rotator_service": "DummyService",
   "radio_control_service": "DummyService",
   "user_login_password": "mypassword",
