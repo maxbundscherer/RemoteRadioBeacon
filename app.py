@@ -187,8 +187,8 @@ def route_api_ham_radio_stop_tx():
 
 if __name__ == '__main__':
     c_debug_mode = True
-    c_port = 8000
-    # c_host = '127.0.0.1'
+    c_port = config_service.get_config().port
+    c_host = config_service.get_config().hostname
 
     if config_service.get_config().enable_auth:
         print("[Enable Auth]")
@@ -202,11 +202,13 @@ if __name__ == '__main__':
         print("[Enable HTTPS]")
         app.run(
             port=c_port,
+            host=c_host,
             debug=c_debug_mode,
             ssl_context='adhoc'
         )
     else:
         app.run(
             port=c_port,
+            host=c_host,
             debug=c_debug_mode,
         )

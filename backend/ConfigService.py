@@ -41,6 +41,8 @@ class ConfigService:
         ant_rotator_service: str
         radio_control_service: str
         user_login_password: str
+        hostname: str
+        port: int
         enable_auth: bool
         enable_https: bool
 

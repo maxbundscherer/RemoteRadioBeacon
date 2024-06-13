@@ -5,6 +5,8 @@
   "ant_rotator_service": "DummyService",
   "radio_control_service": "DummyService",
   "user_login_password": "mypassword",
+  "hostname": "localhost",
+  "port": 8000,
   "enable_https": true,
   "enable_auth": true
 }
