@@ -301,7 +301,7 @@
     <p>Automatically calculates the parameters for the <i>Control</i> section.<br>Displays the information and
         position on a map.</p>
 
-    <form action="javascript:calc_rx_ant_parmas_maidenhead()">
+    <form action="javascript:calc_ant_rotor_params_maidenhead()">
         <table class="tab-content">
             <tr>
                 <td class="tab-first-col">Maidenhead</td>
@@ -319,7 +319,7 @@
 
     <br>
 
-    <form action="javascript:calc_rx_ant_parmas_gps()">
+    <form action="javascript:calc_ant_rotor_params_gps()">
         <table class="tab-content">
             <tr>
                 <td class="tab-first-col">GPS Latitude</td>
@@ -396,11 +396,11 @@
 
     <script>
 
-        function calc_rx_ant_parmas_maidenhead() {
+        function calc_ant_rotor_params_maidenhead() {
             let maidenhead = $("#form_calc_maidenhead").val();
 
             $.ajax({
-                url: '{{ url_for("route_api_ham_rx_ant_params") }}',
+                url: '{{ url_for("route_api_ham_ant_rotor_params") }}',
                 type: "POST",
                 data: JSON.stringify({
                     maidenhead: maidenhead,
@@ -432,12 +432,12 @@
 
         }
 
-        function calc_rx_ant_parmas_gps() {
+        function calc_ant_rotor_params_gps() {
             let lat = $("#form_calc_gps_lat").val();
             let lon = $("#form_calc_gps_lon").val();
 
             $.ajax({
-                url: '{{ url_for("route_api_ham_rx_ant_params") }}',
+                url: '{{ url_for("route_api_ham_ant_rotor_params") }}',
                 type: "POST",
                 data: JSON.stringify({
                     latitude: lat,

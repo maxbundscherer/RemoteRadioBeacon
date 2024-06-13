@@ -13,7 +13,7 @@ from backend.utils.LocationUtil import LocationUtil
 class HamService:
     @dataclass_json
     @dataclass
-    class RxAntParams:
+    class AntRotorParams:
         maidenhead: str
         latitude: float
         longitude: float
@@ -63,7 +63,7 @@ class HamService:
     def stop_radio_tx(self):
         self._radio_control_service.stop_transmit()
 
-    def calc_rx_ant_params_gps(self, latitude: float, longitude: float) -> RxAntParams:
+    def calc_ant_rotor_params_by_gps(self, latitude: float, longitude: float) -> AntRotorParams:
 
         gps_0: LocationUtil.Coordinate = LocationUtil.Coordinate(latitude=self._config_service.get_config().tx_latitude,
                                                                  longitude=self._config_service.get_config().tx_longitude)
@@ -72,7 +72,7 @@ class HamService:
 
         da: LocationUtil.DistanceAzimuth = LocationUtil.calc_distance_azimuth(gps_0, gps_1)
 
-        return HamService.RxAntParams(
+        return HamService.AntRotorParams(
             maidenhead=LocationUtil.coordinates_to_maidenhead(gps_1),
             latitude=gps_1.latitude,
             longitude=gps_1.longitude,
@@ -80,7 +80,7 @@ class HamService:
             azimuth=round(da.azimuth, 2)
         )
 
-    def calc_rx_ant_params_mai(self, maidenhead: str) -> RxAntParams:
+    def calc_ant_rotor_params_by_mai(self, maidenhead: str) -> AntRotorParams:
 
         gps_0: LocationUtil.Coordinate = LocationUtil.Coordinate(latitude=self._config_service.get_config().tx_latitude,
                                                                  longitude=self._config_service.get_config().tx_longitude)
@@ -89,7 +89,7 @@ class HamService:
 
         da: LocationUtil.DistanceAzimuth = LocationUtil.calc_distance_azimuth(gps_0, gps_1)
 
-        return HamService.RxAntParams(
+        return HamService.AntRotorParams(
             maidenhead=maidenhead,
             latitude=gps_1.latitude,
             longitude=gps_1.longitude,
