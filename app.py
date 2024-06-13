@@ -1,4 +1,5 @@
 from flask import Flask, render_template, url_for, jsonify, request
+from flask_basicauth import BasicAuth
 
 from backend.ConfigService import ConfigService
 from backend.HamService import HamService
@@ -185,7 +186,27 @@ def route_api_ham_radio_stop_tx():
 
 
 if __name__ == '__main__':
-    app.run(
-        port=8000,
-        debug=True
-    )
+    c_debug_mode = True
+    c_port = 8000
+    # c_host = '127.0.0.1'
+
+    if config_service.get_config().enable_auth:
+        print("[Enable Auth]")
+        app.config['BASIC_AUTH_USERNAME'] = 'root'
+        app.config['BASIC_AUTH_PASSWORD'] = config_service.get_config().user_login_password
+        app.config['BASIC_AUTH_FORCE'] = True
+
+        basic_auth = BasicAuth(app)
+
+    if config_service.get_config().enable_https:
+        print("[Enable HTTPS]")
+        app.run(
+            port=c_port,
+            debug=c_debug_mode,
+            ssl_context='adhoc'
+        )
+    else:
+        app.run(
+            port=c_port,
+            debug=c_debug_mode,
+        )

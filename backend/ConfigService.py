@@ -40,6 +40,9 @@ class ConfigService:
         tx_longitude: float
         ant_rotator_service: str
         radio_control_service: str
+        user_login_password: str
+        enable_auth: bool
+        enable_https: bool
 
     # @staticmethod
     # def to_json_file(config: Config, fp: str):

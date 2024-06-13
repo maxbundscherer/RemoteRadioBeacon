@@ -3,5 +3,8 @@
   "tx_latitude": 49.452833,
   "tx_longitude": 11.094333,
   "ant_rotator_service": "DummyService",
-  "radio_control_service": "DummyService"
+  "radio_control_service": "DummyService",
+  "user_login_password": "mypassword",
+  "enable_https": true,
+  "enable_auth": true
 }
