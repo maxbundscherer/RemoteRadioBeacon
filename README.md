@@ -12,6 +12,7 @@ Tested on ... (Kenwood TS-2000, HyGain DCU3, Raspberry Pi 4)
 - Web interface for remote control (Flask)
 - Multiple antenna rotors and radios supported (based on hamlib)
 - Remote transmission of a wav file
+- Https and authentication supported
 
 ## Preview
 
