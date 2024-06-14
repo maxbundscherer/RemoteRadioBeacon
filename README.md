@@ -24,20 +24,38 @@ Tested on ... (Kenwood TS-2000, HyGain DCU3, Raspberry Pi 4)
     </tr>
 </table>
 
-## Installation
+## Config
 
-### Preinstall
+- Edit `radioresources/config.json` to match your setup
+- Add your own transmission file `radioresources/transmit.wav`
+
+## Install
+
+### Development/Conda
 
 - Run `conda create --name py311RemoteRadioBeacon python=3.11`
 - Run `conda activate py311RemoteRadioBeacon`
 - Run `pip install -r requirements.txt`
 
-### Config
+### Raspberry Pi 4
 
-- Edit `radioresources/config.json` to match your setup
-- Add your own transmission file `radioresources/transmit.wav`
+- `cd ..`
+- `mkdir MBPythonEnv`
+- `python -m venv MBPythonEnv/`
+- `source MBPythonEnv/bin/activate`
+- `cd RemoteRadioBeacon`
+- `pip install -r requirements.txt`
 
 ## Start
 
+### Development/Conda
+
 - `conda activate py311RemoteRadioBeacon`
+- `./start.sh`
+
+### Raspberry Pi 4
+
+- `cd ..`
+- `source MBPythonEnv/bin/activate`
+- `cd RemoteRadioBeacon`
 - `./start.sh`
