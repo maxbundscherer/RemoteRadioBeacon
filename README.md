@@ -34,6 +34,11 @@ Tested on Kenwood TS-2000, HyGain DCU3, Raspberry Pi 4
 - `DummyService` - Dummy service for testing
 - `DCUService` - HyGain DCU3
 
+### Radio Controller Services
+
+- `DummyService` - Dummy service for testing
+- `KenwoodService` - Kenwood TS-2000
+
 ## Install
 
 ### Development/Conda

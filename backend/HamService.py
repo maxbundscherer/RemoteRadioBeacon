@@ -8,6 +8,7 @@ from backend.antRotator.DCUAntRotatorService import DCUAntRotatorService
 from backend.antRotator.DummyAntRotatorService import DummyAntRotatorService
 from backend.radioControl.AbstractRadioControlService import AbstractRadioControlService, RadioState
 from backend.radioControl.DummyRadioControlService import DummyRadioControlService
+from backend.radioControl.KenwoodRadioControlService import KenwoodRadioControlService
 from backend.utils.LocationUtil import LocationUtil
 
 
@@ -32,6 +33,8 @@ class HamService:
 
         if config_service.get_config().radio_control_service == 'DummyService':
             self._radio_control_service: AbstractRadioControlService = DummyRadioControlService(config_service)
+        elif config_service.get_config().radio_control_service == 'KenwoodService':
+            self._radio_control_service: AbstractRadioControlService = KenwoodRadioControlService(config_service)
         else:
             raise Exception("Unknown RadioControlService", config_service.get_config().radio_control_service)
 
