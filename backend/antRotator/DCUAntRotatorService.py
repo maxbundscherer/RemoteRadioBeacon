@@ -23,16 +23,17 @@ class DCUAntRotatorService(AbstractAntRotatorService):
     async def _impl_async_update(self):
 
         output = os.popen("rotctl -m 406 -r /dev/ttyUSB0 p").read()
+        lines = output.split("\n")
 
-        print("OUTPUT: ", output)
+        if len(lines) == 3:
+            line = lines[0]
+            azimuth = float(line.split(" ")[0])
 
-        time.sleep(10)
-
-        self._state = AntRotatorState(
-            azimuth=round(random.uniform(0, 360), 2),
-            elevation=round(random.uniform(0, 90), 2),
-            last_updated=TimeUtil.get_current_time_utc_str()
-        )
+            self._state = AntRotatorState(
+                azimuth=azimuth,
+                elevation=-1,
+                last_updated=TimeUtil.get_current_time_utc_str()
+            )
 
         self._is_busy = False
 
