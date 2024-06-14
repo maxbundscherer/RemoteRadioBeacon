@@ -4,6 +4,7 @@ from dataclasses_json import dataclass_json
 
 from backend.ConfigService import ConfigService
 from backend.antRotator.AbstractAntRotatorService import AbstractAntRotatorService, AntRotatorState
+from backend.antRotator.DCUAntRotatorService import DCUAntRotatorService
 from backend.antRotator.DummyAntRotatorService import DummyAntRotatorService
 from backend.radioControl.AbstractRadioControlService import AbstractRadioControlService, RadioState
 from backend.radioControl.DummyRadioControlService import DummyRadioControlService
@@ -24,6 +25,8 @@ class HamService:
 
         if config_service.get_config().ant_rotator_service == 'DummyService':
             self._ant_rotator_service: AbstractAntRotatorService = DummyAntRotatorService(config_service)
+        elif config_service.get_config().ant_rotator_service == 'DCUService':
+            self._ant_rotator_service: AbstractAntRotatorService = DCUAntRotatorService(config_service)
         else:
             raise Exception("Unknown AntRotatorService", config_service.get_config().ant_rotator_service)
 
