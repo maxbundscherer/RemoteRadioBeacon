@@ -50,7 +50,6 @@ Tested on Kenwood TS-2000, HyGain DCU3, Raspberry Pi 4
 ### Raspberry Pi 4
 
 - `sudo apt-get install libhamlib-utils`
-
 - `cd ..`
 - `mkdir MBPythonEnv`
 - `python -m venv MBPythonEnv/`
