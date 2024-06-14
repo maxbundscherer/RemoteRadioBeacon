@@ -34,6 +34,8 @@ class DCUAntRotatorService(AbstractAntRotatorService):
                 elevation=-1,
                 last_updated=TimeUtil.get_current_time_utc_str()
             )
+        else:
+            print("WARNING: DCUAntRotatorService._impl_async_update() received unexpected output.")
 
         self._is_busy = False
 
@@ -56,12 +58,14 @@ class DCUAntRotatorService(AbstractAntRotatorService):
             print("WARNING: DCUAntRotatorService.set_azimuth() called while busy. Ignoring.")
             return
 
-        print("WARNING: DummyAntRotatorService.set_azimuth() called. Ignoring.")
-        print("SHOULD SET AZIMUTH TO: ", azimuth)
+        self._is_busy = True
+        os.system(f"rotctl -m 406 -r /dev/ttyUSB0 P {azimuth} 0")
+        self._is_busy = False
 
     def set_elevation(self, elevation: float):
         if self._is_busy:
             print("WARNING: DCUAntRotatorService.set_elevation() called while busy. Ignoring.")
             return
 
+        print("WARNING: DCUAntRotatorService.set_elevation() not implemented.")
         pass

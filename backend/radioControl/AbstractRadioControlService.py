@@ -21,7 +21,7 @@ class AbstractRadioControlService:
             mode='N/A',
             power=-1,
             is_transmitting=False,
-            last_updated=TimeUtil.get_current_time_utc_str()
+            last_updated="N/A"
         )
         assert self._startup_test()
         self._config_service: ConfigService = config_service
