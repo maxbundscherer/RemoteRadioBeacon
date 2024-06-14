@@ -2,7 +2,7 @@
 
 An application to remotely rotate the antenna, set transmission parameters and transmit.
 
-Tested on ... (Kenwood TS-2000, HyGain DCU3, Raspberry Pi 4)
+Tested on Kenwood TS-2000, HyGain DCU3, Raspberry Pi 4
 
 ## Features
 
@@ -10,7 +10,7 @@ Tested on ... (Kenwood TS-2000, HyGain DCU3, Raspberry Pi 4)
 - Control and display of parameters of a radio
 - Calculate the antenna rotor parameters (azimuth and distance) based on GPS coordinates or the Maidenhead locator.
 - Web interface for remote control (flask)
-- Multiple antenna rotors and radios supported (based on hamlib)
+- Multiple antenna rotors and radios supported (based on libhamlib-utils)
 - Remote transmission of a wav file
 - Https and authentication supported
 
@@ -29,6 +29,11 @@ Tested on ... (Kenwood TS-2000, HyGain DCU3, Raspberry Pi 4)
 - Edit `radioresources/config.json` to match your setup
 - Add your own transmission file `radioresources/transmit.wav`
 
+### Ant Rotator Services
+
+- `DummyService` - Dummy service for testing
+- `DCUService` - HyGain DCU3
+
 ## Install
 
 ### Development/Conda
@@ -38,6 +43,8 @@ Tested on ... (Kenwood TS-2000, HyGain DCU3, Raspberry Pi 4)
 - Run `pip install -r requirements.txt`
 
 ### Raspberry Pi 4
+
+- `sudo apt-get install libhamlib-utils`
 
 - `cd ..`
 - `mkdir MBPythonEnv`
