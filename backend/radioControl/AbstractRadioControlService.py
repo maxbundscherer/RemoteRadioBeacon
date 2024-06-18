@@ -16,20 +16,12 @@ class RadioState:
 class AbstractRadioControlService:
 
     def __init__(self, config_service: ConfigService):
-        self._state: RadioState = RadioState(
-            frequency=-1,
-            mode='N/A',
-            power=-1,
-            is_transmitting=False,
-            last_updated="N/A"
-        )
         assert self._startup_test()
         self._config_service: ConfigService = config_service
         print("- RadioControlService initialized.")
 
     def get_state(self) -> RadioState:
-        self._trigger_update_state()
-        return self._state
+        raise NotImplementedError("Method must be implemented in derived classes.")
 
     def set_frequency(self, frequency: int):
         raise NotImplementedError("Method must be implemented in derived classes.")
@@ -48,7 +40,4 @@ class AbstractRadioControlService:
 
     @staticmethod
     def _startup_test() -> bool:
-        raise NotImplementedError("Method must be implemented in derived classes.")
-
-    def _trigger_update_state(self):
         raise NotImplementedError("Method must be implemented in derived classes.")

@@ -10,8 +10,8 @@ class DummyRadioControlService(AbstractRadioControlService):
     def _startup_test() -> bool:
         return True
 
-    def _trigger_update_state(self):
-        self._state = RadioState(
+    def get_state(self) -> RadioState:
+        return RadioState(
             frequency=int(random.uniform(430e6, 440e6)),
             power=int(random.uniform(0, 100)),
             mode=['LSB', 'USB', 'CW', 'AM', 'FM'][random.randint(0, 4)],
