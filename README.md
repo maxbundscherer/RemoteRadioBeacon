@@ -70,8 +70,10 @@ Tested on Kenwood TS-2000, HyGain DCU3, Raspberry Pi 4
 - `source MBPythonEnv/bin/activate`
 - `cd RemoteRadioBeacon`
 - `./start.sh`
--
 
+## Debug
+
+```
 rigctl -m 2014 -s 38400 -r /dev/ttyUSB3 -P /dev/ttyUSB3 --set-conf=rts_state="OFF",dtr_state="OFF" get_freq
 rigctl -m 2014 -s 38400 -r /dev/ttyUSB3 -P /dev/ttyUSB3 --set-conf=rts_state="OFF",dtr_state="OFF" set_freq 431030000
 
@@ -83,3 +85,4 @@ rigctl -m 2014 -s 38400 -r /dev/ttyUSB3 -P /dev/ttyUSB3 --set-conf=rts_state="OF
 
 rigctl -m 2014 -s 38400 -r /dev/ttyUSB3 -P /dev/ttyUSB3 --set-conf=rts_state="OFF",dtr_state="OFF" T 0
 rigctl -m 2014 -s 38400 -r /dev/ttyUSB3 -P /dev/ttyUSB3 --set-conf=rts_state="ON",dtr_state="ON" T 1
+```
