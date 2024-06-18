@@ -8,6 +8,17 @@
         var is_first_refresh_radio = true;
 
         function refresh_ant_rotor() {
+
+            Toastify({
+                text: "Refresh now Ant Rotor Parameters...",
+                position: "center",
+                gravity: "bottom",
+                duration: 5000,
+                style: {
+                    background: "red",
+                },
+            }).showToast();
+
             $.ajax({
                 url: "{{ url_for("route_api_ham_ant_rotator") }}",
                 success: function (data) {
@@ -27,7 +38,7 @@
                         gravity: "bottom",
                         duration: 5000,
                         style: {
-                            background: "blue",
+                            background: "green",
                         },
                     }).showToast();
                 }
@@ -35,6 +46,17 @@
         }
 
         function refresh_radio() {
+
+            Toastify({
+                text: "Refresh now Radio Parameters...",
+                position: "center",
+                gravity: "bottom",
+                duration: 5000,
+                style: {
+                    background: "red",
+                },
+            }).showToast();
+
             $.ajax({
                 url: "{{ url_for("route_api_ham_radio") }}",
                 success: function (data) {
@@ -57,7 +79,7 @@
                         gravity: "bottom",
                         duration: 5000,
                         style: {
-                            background: "blue",
+                            background: "green",
                         },
                     }).showToast();
 
