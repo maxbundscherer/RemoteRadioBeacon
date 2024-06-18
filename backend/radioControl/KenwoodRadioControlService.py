@@ -16,8 +16,8 @@ class KenwoodRadioControlService(AbstractRadioControlService):
 
     @staticmethod
     def _startup_test() -> bool:
-        # TODO
-        return True
+        # Check if rotctl is installed
+        return os.system("rigctl -V") == 0
 
     def get_state(self) -> RadioState:
         # TODO
