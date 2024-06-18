@@ -7,8 +7,7 @@
         var is_first_refresh_ant_rotator = true;
         var is_first_refresh_radio = true;
 
-        function refresh() {
-
+        function refresh_ant_rotor() {
             $.ajax({
                 url: "{{ url_for("route_api_ham_ant_rotator") }}",
                 success: function (data) {
@@ -21,9 +20,21 @@
                         $("#form_ant_rot_elevation").val(data["elevation"]);
                         is_first_refresh_ant_rotator = false;
                     }
+
+                    Toastify({
+                        text: "Refreshed Ant Rotor Parameters",
+                        position: "center",
+                        gravity: "bottom",
+                        duration: 5000,
+                        style: {
+                            background: "blue",
+                        },
+                    }).showToast();
                 }
             });
+        }
 
+        function refresh_radio() {
             $.ajax({
                 url: "{{ url_for("route_api_ham_radio") }}",
                 success: function (data) {
@@ -40,44 +51,18 @@
                         is_first_refresh_radio = false;
                     }
 
+                    Toastify({
+                        text: "Refreshed Radio Parameters",
+                        position: "center",
+                        gravity: "bottom",
+                        duration: 5000,
+                        style: {
+                            background: "blue",
+                        },
+                    }).showToast();
+
                 }
             });
-
-        }
-
-        var background_refresh = -1;
-
-        function start_refresh() {
-            if (background_refresh !== -1) {
-                return;
-            }
-            background_refresh = window.setInterval(function () {
-                refresh();
-            }, 3000);
-
-            Toastify({
-                text: "Start Background Refresh",
-                position: "center",
-                gravity: "bottom",
-                duration: 5000,
-                style: {
-                    background: "green",
-                },
-            }).showToast();
-        }
-
-        function stop_refresh() {
-            window.clearInterval(background_refresh);
-            background_refresh = -1;
-            Toastify({
-                text: "Stop Background Refresh",
-                position: "center",
-                gravity: "bottom",
-                duration: 5000,
-                style: {
-                    background: "red",
-                },
-            }).showToast();
         }
 
     </script>
@@ -269,15 +254,11 @@
 
     <p>This page is used to display the parameters and to control the antenna and the radio.</p>
 
-    <h3>Page Control</h3>
+    <h3>Antenna Rotator</h3>
 
     <ul>
-        <li><a href="javascript:refresh()">Manual Refresh</a></li>
-        <li><a href="javascript:start_refresh()">Start Background Refresh</a></li>
-        <li><a href="javascript:stop_refresh()">Stop Background Refresh</a></li>
+        <li><a href="javascript:refresh_ant_rotor()">Refresh Data</a></li>
     </ul>
-
-    <h3>Antenna Rotator</h3>
 
     <h4>Overview</h4>
 
@@ -500,6 +481,10 @@
     </form>
 
     <h3>Radio</h3>
+
+    <ul>
+        <li><a href="javascript:refresh_radio()">Refresh Data</a></li>
+    </ul>
 
     <h4>Overview</h4>
 
