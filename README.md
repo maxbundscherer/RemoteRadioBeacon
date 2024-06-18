@@ -66,7 +66,7 @@ Tested on Kenwood TS-2000, HyGain DCU3, Raspberry Pi 4
 
 ### Raspberry Pi 4
 
-### Connect Radio
+#### Connect Radio
 
 - Run and kill process
 
@@ -76,7 +76,7 @@ Tested on Kenwood TS-2000, HyGain DCU3, Raspberry Pi 4
 
 `rigctl -m 2014 -s 38400 -r /dev/ttyUSB3 -P /dev/ttyUSB3 --set-conf=rts_state="OFF",dtr_state="OFF" T 0`
 
-### Software
+#### Software
 
 - `cd ..`
 - `source MBPythonEnv/bin/activate`
