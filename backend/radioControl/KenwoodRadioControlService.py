@@ -130,9 +130,9 @@ class KenwoodRadioControlService(AbstractRadioControlService):
         if self._is_transmitting:
             print("WARNING: KenwoodRadioControlService.set_frequency() called while transmitting. Ignoring.")
             return
-        # TODO
-        print("WARNING: DummyRadioControlService.set_frequency() called. Ignoring.")
-        print("SHOULD SET FREQUENCY TO", frequency)
+        os.popen(
+            f'rigctl -m 2014 -s 38400 -r {self._config_service.get_config().radio_control_device} -P {self._config_service.get_config().radio_control_device} --set-conf=rts_state="OFF",dtr_state="OFF" set_freq {frequency}'
+        ).read()
 
     def set_power(self, power: int):
         if self._is_transmitting:
