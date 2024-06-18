@@ -12,7 +12,7 @@ class DCUAntRotatorService(AbstractAntRotatorService):
         return os.system("rotctl -V") == 0
 
     def get_state(self) -> AntRotatorState:
-        output = os.popen("rotctl -m 406 -r /dev/ttyUSB0 p").read()
+        output = os.popen(f"rotctl -m 406 -r {self._config_service.get_config().ant_rotator_device} p").read()
         lines = output.split("\n")
 
         if len(lines) == 3:
@@ -33,7 +33,7 @@ class DCUAntRotatorService(AbstractAntRotatorService):
             )
 
     def set_azimuth(self, azimuth: float):
-        os.system(f"rotctl -m 406 -r /dev/ttyUSB0 P {azimuth} 0")
+        os.system(f"rotctl -m 406 -r {self._config_service.get_config().ant_rotator_device} P {azimuth} 0")
 
     def set_elevation(self, elevation: float):
         print("WARNING: DCUAntRotatorService.set_elevation() not implemented.")
