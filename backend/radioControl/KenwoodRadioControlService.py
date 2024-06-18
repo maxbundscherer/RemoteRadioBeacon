@@ -120,19 +120,37 @@ class KenwoodRadioControlService(AbstractRadioControlService):
 
     async def _impl_async_tx(self):
 
+        print("- [RADIO] Staring TX")
+
         print("- Radio Set PTT 1")
         os.popen(
             f'rigctl -m 2014 -s 38400 -r {self._config_service.get_config().radio_control_device} -P {self._config_service.get_config().radio_control_device} --set-conf=rts_state="ON",dtr_state="ON" T 1'
         ).read()
 
-        # TODO
-        time.sleep(10)
+        # Start async aplay and play the wav file
+        print("- [RADIO] Starting TX Audio")
+        os.popen(
+            f'aplay {self._config_service.C_LOCAL_WAV_TX_FILE}'
+        )
+
+        # Wait if process has finished
+        has_fin = False
+        while not has_fin:
+            print("- [RADIO] Waiting for TX Audio to finish")
+            output = (os.popen(
+                f'ps -ef | grep aplay | grep -v grep')
+                      .read())
+            if output == "":
+                has_fin = True
+            else:
+                time.sleep(1)
 
         print("- Radio Set PTT 0")
         os.popen(
             f'rigctl -m 2014 -s 38400 -r {self._config_service.get_config().radio_control_device} -P {self._config_service.get_config().radio_control_device} --set-conf=rts_state="OFF",dtr_state="OFF" T 0'
         ).read()
 
+        print("- [RADIO] Finished TX")
         self._is_transmitting = False
 
     def _start_async_tx(self):
@@ -152,9 +170,9 @@ class KenwoodRadioControlService(AbstractRadioControlService):
         self._trigger_tx()
 
     def stop_transmit(self):
-        if self._is_transmitting:
-            print("WARNING: KenwoodRadioControlService.stop_transmit() called while transmitting. Ignoring.")
+        if not self._is_transmitting:
+            print("WARNING: KenwoodRadioControlService.stop_transmit() called while not transmitting. Ignoring.")
             return
-        # TODO
-        print("WARNING: DummyRadioControlService.stop_transmit() called. Ignoring.")
-        print("SHOULD STOP TRANSMITTING")
+        os.popen(
+            'pkill -i aplay'
+        )
