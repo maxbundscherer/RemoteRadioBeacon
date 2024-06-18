@@ -1,6 +1,7 @@
 import asyncio
 import os
 import random
+import time
 from concurrent.futures import ThreadPoolExecutor
 
 from backend.ConfigService import ConfigService
@@ -91,41 +92,6 @@ class KenwoodRadioControlService(AbstractRadioControlService):
                 last_updated=TimeUtil.get_current_time_utc_str()
             )
 
-    # async def _impl_async_update(self):
-    #
-    #     # output = os.popen("rotctl -m 406 -r /dev/ttyUSB0 p").read()
-    #     # lines = output.split("\n")
-    #     #
-    #     # if len(lines) == 3:
-    #     #     line = lines[0]
-    #     #     azimuth = float(line.split(" ")[0])
-    #     #
-    #     #     self._state = RadioState(
-    #     #         frequency=int(random.uniform(430e6, 440e6)),
-    #     #         power=int(random.uniform(0, 100)),
-    #     #         mode=['LSB', 'USB', 'CW', 'AM', 'FM'][random.randint(0, 4)],
-    #     #         is_transmitting=random.choice([True, False]),
-    #     #         last_updated=TimeUtil.get_current_time_utc_str()
-    #     #     )
-    #     # else:
-    #     #     print("WARNING: DCUAntRotatorService._impl_async_update() received unexpected output.")
-    #
-    #     self._is_busy = False
-    #
-    # def _start_async_update(self):
-    #     loop = asyncio.new_event_loop()
-    #     asyncio.set_event_loop(loop)
-    #     loop.run_until_complete(self._impl_async_update())
-    #     loop.close()
-    #
-    # def _trigger_update_state(self):
-    #     if self._is_busy:
-    #         print("WARNING: KenwoodRadioControlService._trigger_update_state() called while busy. Ignoring.")
-    #         return
-    #
-    #     self._is_busy = True
-    #     self._executor.submit(self._start_async_update)
-
     def set_frequency(self, frequency: int):
         if self._is_transmitting:
             print("WARNING: KenwoodRadioControlService.set_frequency() called while transmitting. Ignoring.")
@@ -152,14 +118,38 @@ class KenwoodRadioControlService(AbstractRadioControlService):
             f'rigctl -m 2014 -s 38400 -r {self._config_service.get_config().radio_control_device} -P {self._config_service.get_config().radio_control_device} --set-conf=rts_state="OFF",dtr_state="OFF" set_mode {mode} 0'
         ).read()
 
+    async def _impl_async_tx(self):
+
+        print("- Radio Set PTT 1")
+        os.popen(
+            f'rigctl -m 2014 -s 38400 -r {self._config_service.get_config().radio_control_device} -P {self._config_service.get_config().radio_control_device} --set-conf=rts_state="ON",dtr_state="ON" T 1'
+        ).read()
+
+        # TODO
+        time.sleep(10)
+
+        print("- Radio Set PTT 0")
+        os.popen(
+            f'rigctl -m 2014 -s 38400 -r {self._config_service.get_config().radio_control_device} -P {self._config_service.get_config().radio_control_device} --set-conf=rts_state="OFF",dtr_state="OFF" T 0'
+        ).read()
+
+        self._is_transmitting = False
+
+    def _start_async_tx(self):
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        loop.run_until_complete(self._impl_async_tx())
+        loop.close()
+
+    def _trigger_tx(self):
+        self._is_transmitting = True
+        self._executor.submit(self._start_async_tx)
+
     def start_transmit(self):
         if self._is_transmitting:
             print("WARNING: KenwoodRadioControlService.start_transmit() called while transmitting. Ignoring.")
             return
-        # TODO
-        print("WARNING: DummyRadioControlService.start_transmit() called. Ignoring.")
-        print("SHOULD START TRANSMITTING")
-        print("WAV DURATION", self._config_service.get_local_wav_tx_duration())
+        self._trigger_tx()
 
     def stop_transmit(self):
         if self._is_transmitting:
