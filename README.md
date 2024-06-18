@@ -8,7 +8,7 @@ Tested on Kenwood TS-2000, HyGain DCU3, Raspberry Pi 4
 
 - Control and display of antenna rotor parameters
 - Control and display of parameters of a radio
-- Calculate the antenna rotor parameters (azimuth and distance) based on GPS coordinates or the Maidenhead locator.
+- Calculate the antenna rotor parameters (azimuth and distance) based on GPS coordinates or the Maidenhead locator
 - Web interface for remote control (flask)
 - Multiple antenna rotors and radios supported (based on libhamlib-utils)
 - Remote transmission of a wav file
@@ -70,3 +70,16 @@ Tested on Kenwood TS-2000, HyGain DCU3, Raspberry Pi 4
 - `source MBPythonEnv/bin/activate`
 - `cd RemoteRadioBeacon`
 - `./start.sh`
+-
+
+rigctl -m 2014 -s 38400 -r /dev/ttyUSB3 -P /dev/ttyUSB3 --set-conf=rts_state="OFF",dtr_state="OFF" get_freq
+rigctl -m 2014 -s 38400 -r /dev/ttyUSB3 -P /dev/ttyUSB3 --set-conf=rts_state="OFF",dtr_state="OFF" set_freq 431030000
+
+rigctl -m 2014 -s 38400 -r /dev/ttyUSB3 -P /dev/ttyUSB3 --set-conf=rts_state="OFF",dtr_state="OFF" get_mode
+rigctl -m 2014 -s 38400 -r /dev/ttyUSB3 -P /dev/ttyUSB3 --set-conf=rts_state="OFF",dtr_state="OFF" set_mode USB 0
+
+rigctl -m 2014 -s 38400 -r /dev/ttyUSB3 -P /dev/ttyUSB3 --set-conf=rts_state="OFF",dtr_state="OFF" get_level RFPOWER
+rigctl -m 2014 -s 38400 -r /dev/ttyUSB3 -P /dev/ttyUSB3 --set-conf=rts_state="OFF",dtr_state="OFF" set_level RFPOWER 0.1
+
+rigctl -m 2014 -s 38400 -r /dev/ttyUSB3 -P /dev/ttyUSB3 --set-conf=rts_state="OFF",dtr_state="OFF" T 0
+rigctl -m 2014 -s 38400 -r /dev/ttyUSB3 -P /dev/ttyUSB3 --set-conf=rts_state="ON",dtr_state="ON" T 1
