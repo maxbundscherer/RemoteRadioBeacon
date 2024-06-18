@@ -9,7 +9,7 @@ import librosa
 
 class ConfigService:
     C_APP_TITLE = 'RemoteRadioBeacon'
-    C_APP_VERSION = '0.0.4'
+    C_APP_VERSION = '0.0.5'
     C_LOCAL_FILE = 'radioresources/config.json'
 
     C_LOCAL_WAV_TX_FILE = 'radioresources/transmit.wav'
@@ -39,7 +39,9 @@ class ConfigService:
         tx_latitude: float
         tx_longitude: float
         ant_rotator_service: str
+        ant_rotator_device: str
         radio_control_service: str
+        radio_control_device: str
         user_login_password: str
         hostname: str
         port: int
