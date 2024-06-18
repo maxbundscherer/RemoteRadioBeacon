@@ -66,6 +66,18 @@ Tested on Kenwood TS-2000, HyGain DCU3, Raspberry Pi 4
 
 ### Raspberry Pi 4
 
+### Connect Radio
+
+- Run and kill process
+
+`rigctl -m 2014 -s 38400 -r /dev/ttyUSB3 -P /dev/ttyUSB3 --set-conf=rts_state="ON",dtr_state="ON"`
+
+- Reset ptt after
+
+`rigctl -m 2014 -s 38400 -r /dev/ttyUSB3 -P /dev/ttyUSB3 --set-conf=rts_state="OFF",dtr_state="OFF" T 0`
+
+### Software
+
 - `cd ..`
 - `source MBPythonEnv/bin/activate`
 - `cd RemoteRadioBeacon`
