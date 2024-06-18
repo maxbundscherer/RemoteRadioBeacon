@@ -22,9 +22,9 @@ class KenwoodRadioControlService(AbstractRadioControlService):
     def get_state(self) -> RadioState:
         # TODO
         return RadioState(
-            frequency=int(random.uniform(430e6, 440e6)),
-            power=int(random.uniform(0, 100)),
-            mode=['LSB', 'USB', 'CW', 'AM', 'FM'][random.randint(0, 4)],
+            frequency=-1,
+            power=-1,
+            mode="error",
             is_transmitting=self._is_transmitting,
             last_updated=TimeUtil.get_current_time_utc_str()
         )
