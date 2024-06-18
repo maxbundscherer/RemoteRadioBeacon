@@ -138,9 +138,11 @@ class KenwoodRadioControlService(AbstractRadioControlService):
         if self._is_transmitting:
             print("WARNING: KenwoodRadioControlService.set_power() called while transmitting. Ignoring.")
             return
-        # TODO
-        print("WARNING: DummyRadioControlService.set_power() called. Ignoring.")
-        print("SHOULD SET POWER TO", power)
+        power_float = power / 100
+        power_str = str(round(power_float, 2))
+        os.popen(
+            f'rigctl -m 2014 -s 38400 -r {self._config_service.get_config().radio_control_device} -P {self._config_service.get_config().radio_control_device} --set-conf=rts_state="OFF",dtr_state="OFF" set_level RFPOWER {power_str}'
+        ).read()
 
     def set_mode(self, mode: str):
         if self._is_transmitting:
