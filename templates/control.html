@@ -391,8 +391,12 @@
                 .bindPopup('RX')
                 .openPopup();
 
-            map.setView([lat, lon], 15);
+            //Berechne mitte zwischen TX und RX
+            var middle_lat = ({{ page_tx_latitude }} + lat) / 2;
+            var middle_lon = ({{ page_tx_longitude }} + lon) / 2;
 
+            {#map.setView([middle_lat, middle_lon], 15);#}
+            map.setView([middle_lat, middle_lon], 3);
 
         }
     </script>
