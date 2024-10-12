@@ -7,17 +7,20 @@
         var is_first_refresh_ant_rotator = true;
         var is_first_refresh_radio = true;
 
-        function refresh_ant_rotor() {
+        function refresh_ant_rotor(flag_refresh_man = false) {
 
-            Toastify({
-                text: "Refresh now Ant Rotor Parameters...",
-                position: "center",
-                gravity: "bottom",
-                duration: 5000,
-                style: {
-                    background: "red",
-                },
-            }).showToast();
+            if (flag_refresh_man) {
+                Toastify({
+                        text: "Refresh now Ant Rotor Parameters...",
+                        position: "center",
+                        gravity: "bottom",
+                        duration: 5000,
+                        style: {
+                            background: "red",
+                        },
+                    }
+                ).showToast();
+            }
 
             $.ajax({
                 url: "{{ url_for("route_api_ham_ant_rotator") }}",
@@ -26,21 +29,34 @@
                     $("#lbl_ant_rot_elevation").text(data["elevation"]);
                     $("#lbl_ant_rot_last_updated").text(data["last_updated"]);
 
-                    if (is_first_refresh_ant_rotator) {
+                    if (is_first_refresh_ant_rotator || flag_refresh_man) {
                         $("#form_ant_rot_azimuth").val(data["azimuth"]);
                         $("#form_ant_rot_elevation").val(data["elevation"]);
                         is_first_refresh_ant_rotator = false;
                     }
 
-                    Toastify({
-                        text: "Refreshed Ant Rotor Parameters",
-                        position: "center",
-                        gravity: "bottom",
-                        duration: 5000,
-                        style: {
-                            background: "green",
-                        },
-                    }).showToast();
+                    if (flag_refresh_man) {
+                        Toastify({
+                                text: "Refreshed Ant Rotor Parameters",
+                                position: "center",
+                                gravity: "bottom",
+                                duration: 5000,
+                                style: {
+                                    background: "green",
+                                },
+                            }
+                        ).showToast();
+
+                    } else {
+                        {#Get Azimuth from control#}
+                        let azimuth_con = $("#form_ant_rot_azimuth").val();
+
+                        {#Get Azimuth from output #}
+                        let azimuth_out = data["azimuth"];
+
+                        drawCircleWithLines(azimuth_out, azimuth_con);
+                    }
+
                 }
             });
         }
@@ -279,8 +295,68 @@
     <h3>Antenna Rotator</h3>
 
     <ul>
-        <li><a href="javascript:refresh_ant_rotor()">Refresh Data</a></li>
+        <li><a href="javascript:refresh_ant_rotor(true)">Refresh Data</a></li>
     </ul>
+
+    <script>
+        setInterval(refresh_ant_rotor, 3000);
+    </script>
+
+    <canvas id="myCanvas" width="100" height="100" style="margin: 0; padding: 0"></canvas>
+    <script>
+        // Funktion, um den Kreis und die Linien zu zeichnen
+        function drawCircleWithLines(redAngle, greenAngle) {
+            const canvas = document.getElementById('myCanvas');
+            const ctx = canvas.getContext('2d');
+
+            // Canvas leeren
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Mittelpunkt des Kreises
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const radius = 40; // Radius auf 40 reduzieren, da die Canvasgröße klein ist
+
+            // Kreis zeichnen
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+            ctx.strokeStyle = 'black';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // Funktion, um Winkel in Radiant umzuwandeln
+            function degreesToRadians(degrees) {
+                return (degrees - 90) * (Math.PI / 180); // 90 Grad abziehen, um den Nullpunkt auf 12 Uhr zu setzen
+            }
+
+            // Rote Linie zeichnen
+            const redRadians = degreesToRadians(redAngle);
+            const redX = centerX + radius * Math.cos(redRadians);
+            const redY = centerY + radius * Math.sin(redRadians);
+
+            ctx.beginPath();
+            ctx.moveTo(centerX, centerY);
+            ctx.lineTo(redX, redY);
+            ctx.strokeStyle = 'red';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // Grüne Linie zeichnen
+            const greenRadians = degreesToRadians(greenAngle);
+            const greenX = centerX + radius * Math.cos(greenRadians);
+            const greenY = centerY + radius * Math.sin(greenRadians);
+
+            ctx.beginPath();
+            ctx.moveTo(centerX, centerY);
+            ctx.lineTo(greenX, greenY);
+            ctx.strokeStyle = 'gray';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+        }
+
+        drawCircleWithLines(0, 0);
+
+    </script>
 
     <h4>Overview</h4>
 
