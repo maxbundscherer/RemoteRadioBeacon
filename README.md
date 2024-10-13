@@ -9,6 +9,7 @@ Tested on Kenwood TS-2000, HyGain DCU3, Raspberry Pi 4
 - Control and display of antenna rotor parameters
 - Control and display of parameters of a radio
 - Calculate the antenna rotor parameters (azimuth and distance) based on GPS coordinates or the Maidenhead locator
+- Live visualize antenna beam on the map (is and should)
 - Web interface for remote control (flask)
 - Multiple antenna rotors and radios supported (based on libhamlib-utils)
 - Remote transmission of a wav file
@@ -21,6 +22,7 @@ Tested on Kenwood TS-2000, HyGain DCU3, Raspberry Pi 4
         <td><img src="images/prev1.png" style="max-height:300px"></td>
         <td><img src="images/prev2.png" style="max-height:300px"></td>
         <td><img src="images/prev3.png" style="max-height:300px"></td>
+        <td><img src="images/prev4.png" style="max-height:300px"></td>
     </tr>
 </table>
 
