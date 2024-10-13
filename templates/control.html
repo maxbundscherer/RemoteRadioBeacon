@@ -428,7 +428,7 @@
             }).addTo(map);
 
             {#map.setView([middle_lat, middle_lon], 15);#}
-            map.setView([middle_lat, middle_lon], 3);
+            map.setView([middle_lat, middle_lon], 1);
 
 
         }
@@ -599,9 +599,9 @@
 
     <br/>
 
-    <div id="map2" style="max-width: 80%; height: 600px"></div>
+    <div id="map2" style="width: 600px; height: 400px"></div>
     <script>
-        var map2 = L.map('map2').setView([{{ page_tx_latitude }}, {{ page_tx_longitude }}], 1);
+        var map2 = L.map('map2').setView([{{ page_tx_latitude }}, {{ page_tx_longitude }}], 1.5);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
