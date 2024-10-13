@@ -363,6 +363,80 @@
 
     </script>
 
+    <br/>
+    <div id="map2" style="width: 600px; height: 400px"></div>
+    <script>
+        var map2 = L.map('map2').setView([{{ page_tx_latitude }}, {{ page_tx_longitude }}], 1);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map2);
+        var marker2 = L.marker([{{ page_tx_latitude }}, {{ page_tx_longitude }}]).addTo(map2)
+            .bindPopup('TX')
+            .openPopup();
+        var geodesic_marker_is = L.geodesic([[{{ page_tx_latitude }}, {{ page_tx_latitude }}], [{{ page_tx_latitude }}, {{ page_tx_latitude }}]], {
+            weight: 2,
+            opacity: 1,
+            color: 'gray',
+            steps: 50
+        }).addTo(map2);
+        var geodesic_marker_should = L.geodesic([[{{ page_tx_latitude }}, {{ page_tx_latitude }}], [{{ page_tx_latitude }}, {{ page_tx_latitude }}]], {
+            weight: 2,
+            opacity: 1,
+            color: 'red',
+            steps: 50
+        }).addTo(map2);
+
+        function renew_geodesic_map(bearingDegree, bearingDegreeShould) {
+
+            // Alten Marker entfernen
+            map2.removeLayer(geodesic_marker_is);
+            map2.removeLayer(geodesic_marker_should);
+
+            let start_lat = {{ page_tx_latitude }};
+            let start_lon = {{ page_tx_longitude }};
+
+            {#let simulated_distance = 10000;  // Simulierte Entfernung (in Kilometern)#}
+
+            var simulated_distance = 20000;
+
+            // Konvertiere Bearing in Radians
+            let bearingRad = bearingDegree * Math.PI / 180;
+            let bearingRadShould = bearingDegreeShould * Math.PI / 180;
+
+            // Berechne Endkoordinaten mit Hilfe einer einfachen Kugelprojektion
+            let R = 6371; // Erdradius in Kilometern
+            let end_lat = Math.asin(Math.sin(start_lat * Math.PI / 180) * Math.cos(simulated_distance / R) +
+                Math.cos(start_lat * Math.PI / 180) * Math.sin(simulated_distance / R) * Math.cos(bearingRad)) * 180 / Math.PI;
+
+            let end_lon = start_lon + Math.atan2(Math.sin(bearingRad) * Math.sin(simulated_distance / R) * Math.cos(start_lat * Math.PI / 180),
+                Math.cos(simulated_distance / R) - Math.sin(start_lat * Math.PI / 180) * Math.sin(end_lat * Math.PI / 180)) * 180 / Math.PI;
+
+            let end_lat_should = Math.asin(Math.sin(start_lat * Math.PI / 180) * Math.cos(simulated_distance / R) +
+                Math.cos(start_lat * Math.PI / 180) * Math.sin(simulated_distance / R) * Math.cos(bearingRadShould)) * 180 / Math.PI;
+
+            let end_lon_should = start_lon + Math.atan2(Math.sin(bearingRadShould) * Math.sin(simulated_distance / R) * Math.cos(start_lat * Math.PI / 180),
+                Math.cos(simulated_distance / R) - Math.sin(start_lat * Math.PI / 180) * Math.sin(end_lat_should * Math.PI / 180)) * 180 / Math.PI;
+
+            // Geodätische Linie hinzufügen
+            geodesic_marker_is = L.geodesic([[start_lat, start_lon], [end_lat, end_lon]], {
+                weight: 2,
+                opacity: 1,
+                color: 'gray',
+                steps: 50
+            }).addTo(map2);
+
+            geodesic_marker_should = L.geodesic([[start_lat, start_lon], [end_lat_should, end_lon_should]], {
+                weight: 2,
+                opacity: 1,
+                color: 'red',
+                steps: 50
+            }).addTo(map2);
+
+        }
+
+    </script>
+
     <h4>Overview</h4>
 
     <table class="tab-content">
