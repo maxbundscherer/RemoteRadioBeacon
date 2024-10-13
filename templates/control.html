@@ -2,6 +2,10 @@
 
 {% block content %}
 
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/leaflet.css') }}"/>
+    <script src="{{ url_for('static',filename='scripts/leaflet.js') }}"></script>
+    <script src="{{ url_for('static',filename='scripts/leaflet.geodesic') }}"></script>
+
     <script>
 
         var is_first_refresh_ant_rotator = true;
@@ -55,6 +59,7 @@
                         let azimuth_out = data["azimuth"];
 
                         drawCircleWithLines(azimuth_out, azimuth_con);
+                        renew_geodesic_map(azimuth_con, azimuth_out);
                     }
 
                 }
@@ -440,10 +445,7 @@
 
     <br>
 
-    <link rel="stylesheet" href="{{ url_for('static',filename='styles/leaflet.css') }}"/>
     <div id="map"></div>
-    <script src="{{ url_for('static',filename='scripts/leaflet.js') }}"></script>
-    <script src="{{ url_for('static',filename='scripts/leaflet.geodesic') }}"></script>
     <script>
         var map = L.map('map').setView([{{ page_tx_latitude }}, {{ page_tx_longitude }}], 15);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
