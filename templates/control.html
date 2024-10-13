@@ -443,6 +443,7 @@
     <link rel="stylesheet" href="{{ url_for('static',filename='styles/leaflet.css') }}"/>
     <div id="map"></div>
     <script src="{{ url_for('static',filename='scripts/leaflet.js') }}"></script>
+    <script src="{{ url_for('static',filename='scripts/leaflet.geodesic') }}"></script>
     <script>
         var map = L.map('map').setView([{{ page_tx_latitude }}, {{ page_tx_longitude }}], 15);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -471,8 +472,18 @@
             var middle_lat = ({{ page_tx_latitude }} + lat) / 2;
             var middle_lon = ({{ page_tx_longitude }} + lon) / 2;
 
+
+            //Zeichne GEODESIC LINE
+            var geodesic = L.geodesic([[{{ page_tx_latitude }}, {{ page_tx_longitude }}], [lat, lon]], {
+                weight: 2,
+                opacity: 1,
+                color: 'red',
+                steps: 50
+            }).addTo(map);
+
             {#map.setView([middle_lat, middle_lon], 15);#}
             map.setView([middle_lat, middle_lon], 3);
+
 
         }
     </script>
