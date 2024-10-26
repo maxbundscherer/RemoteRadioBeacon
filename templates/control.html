@@ -617,7 +617,7 @@
             terminator.setTime();
         }, 60000); // Every minute
 
-        function renew_geodesic_map(bearingDegree, bearingDegreeShould) {
+        function renew_geodesic_map(bearingDegreeShould, bearingDegree) {
 
             // Alten Marker entfernen
             map2.removeLayer(geodesic_marker_is);
@@ -652,14 +652,14 @@
             geodesic_marker_is = L.geodesic([[start_lat, start_lon], [end_lat, end_lon]], {
                 weight: 2,
                 opacity: 1,
-                color: 'blue',
+                color: 'red',
                 steps: 50
             }).addTo(map2);
 
             geodesic_marker_should = L.geodesic([[start_lat, start_lon], [end_lat_should, end_lon_should]], {
                 weight: 2,
                 opacity: 1,
-                color: 'red',
+                color: 'blue',
                 steps: 50
             }).addTo(map2);
 
