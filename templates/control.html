@@ -602,13 +602,13 @@
         var geodesic_marker_is = L.geodesic([[{{ page_tx_latitude }}, {{ page_tx_latitude }}], [{{ page_tx_latitude }}, {{ page_tx_latitude }}]], {
             weight: 2,
             opacity: 1,
-            color: 'blue',
+            color: 'red',
             steps: 50
         }).addTo(map2);
         var geodesic_marker_should = L.geodesic([[{{ page_tx_latitude }}, {{ page_tx_latitude }}], [{{ page_tx_latitude }}, {{ page_tx_latitude }}]], {
             weight: 2,
             opacity: 1,
-            color: 'red',
+            color: 'blue',
             steps: 50
         }).addTo(map2);
 
