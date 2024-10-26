@@ -619,6 +619,20 @@
             steps: 50
         }).addTo(map2);
 
+        var geodesic_marker_is_left = L.geodesic([[{{ page_tx_latitude }}, {{ page_tx_latitude }}], [{{ page_tx_latitude }}, {{ page_tx_latitude }}]], {
+            weight: 2,
+            opacity: 1,
+            color: 'orange',
+            steps: 50
+        }).addTo(map2);
+
+        var geodesic_marker_is_right = L.geodesic([[{{ page_tx_latitude }}, {{ page_tx_latitude }}], [{{ page_tx_latitude }}, {{ page_tx_latitude }}]], {
+            weight: 2,
+            opacity: 1,
+            color: 'orange',
+            steps: 50
+        }).addTo(map2);
+
         var terminator = L.terminator().addTo(map2);
         setInterval(function () {
             terminator.setTime();
@@ -630,6 +644,8 @@
             map2.removeLayer(geodesic_marker_is);
             map2.removeLayer(geodesic_marker_should);
             map2.removeLayer(geodesic_marker_is_back);
+            map2.removeLayer(geodesic_marker_is_left);
+            map2.removeLayer(geodesic_marker_is_right);
 
             let start_lat = {{ page_tx_latitude }};
             let start_lon = {{ page_tx_longitude }};
@@ -683,6 +699,34 @@
                 weight: 2,
                 opacity: 1,
                 color: 'yellow',
+                steps: 50
+            }).addTo(map2);
+
+            let bearingRadIs_Left = (bearingDegree + 90) * Math.PI / 180;
+
+            let end_lat_is_left = Math.asin(Math.sin(start_lat * Math.PI / 180) * Math.cos(simulated_distance_short / R) +
+                Math.cos(start_lat * Math.PI / 180) * Math.sin(simulated_distance_short / R) * Math.cos(bearingRadIs_Left)) * 180 / Math.PI;
+            let end_lon_is_left = start_lon + Math.atan2(Math.sin(bearingRadIs_Left) * Math.sin(simulated_distance_short / R) * Math.cos(start_lat * Math.PI / 180),
+                Math.cos(simulated_distance_short / R) - Math.sin(start_lat * Math.PI / 180) * Math.sin(end_lat_is_left * Math.PI / 180)) * 180 / Math.PI;
+
+            geodesic_marker_is_left = L.geodesic([[start_lat, start_lon], [end_lat_is_left, end_lon_is_left]], {
+                weight: 2,
+                opacity: 1,
+                color: 'orange',
+                steps: 50
+            }).addTo(map2);
+
+            let bearingRadIs_Right = (bearingDegree - 90) * Math.PI / 180;
+
+            let end_lat_is_right = Math.asin(Math.sin(start_lat * Math.PI / 180) * Math.cos(simulated_distance_short / R) +
+                Math.cos(start_lat * Math.PI / 180) * Math.sin(simulated_distance_short / R) * Math.cos(bearingRadIs_Right)) * 180 / Math.PI;
+            let end_lon_is_right = start_lon + Math.atan2(Math.sin(bearingRadIs_Right) * Math.sin(simulated_distance_short / R) * Math.cos(start_lat * Math.PI / 180),
+                Math.cos(simulated_distance_short / R) - Math.sin(start_lat * Math.PI / 180) * Math.sin(end_lat_is_right * Math.PI / 180)) * 180 / Math.PI;
+
+            geodesic_marker_is_right = L.geodesic([[start_lat, start_lon], [end_lat_is_right, end_lon_is_right]], {
+                weight: 2,
+                opacity: 1,
+                color: 'orange',
                 steps: 50
             }).addTo(map2);
 
