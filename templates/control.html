@@ -389,6 +389,9 @@
             steps: 50
         }).addTo(map);
 
+        var global_rx_lat = -1;
+        var global_rx_lon = -1;
+
         function renew_map(lat, lon) {
 
 
@@ -419,6 +422,9 @@
 
             {#map.setView([middle_lat, middle_lon], 15);#}
             map.setView([middle_lat, middle_lon], 1);
+
+            global_rx_lat = lat;
+            global_rx_lon = lon;
 
 
         }
@@ -597,8 +603,8 @@
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map2);
         var marker2 = L.marker([{{ page_tx_latitude }}, {{ page_tx_longitude }}]).addTo(map2)
-            .bindPopup('TX')
-            .openPopup();
+        {#.bindPopup('TX')#}
+        {#.openPopup();#}
         var geodesic_marker_is = L.geodesic([[{{ page_tx_latitude }}, {{ page_tx_latitude }}], [{{ page_tx_latitude }}, {{ page_tx_latitude }}]], {
             weight: 2,
             opacity: 1,
@@ -638,6 +644,10 @@
             terminator.setTime();
         }, 60000); // Every minute
 
+        var marker_rx_geo = L.marker([{{ page_tx_latitude }}, {{ page_tx_longitude }}]).addTo(map)
+            .bindPopup('RX')
+            .openPopup();
+
         function renew_geodesic_map(bearingDegreeShould, bearingDegree) {
 
             // Alten Marker entfernen
@@ -646,6 +656,7 @@
             map2.removeLayer(geodesic_marker_is_back);
             map2.removeLayer(geodesic_marker_is_left);
             map2.removeLayer(geodesic_marker_is_right);
+            map2.removeLayer(marker_rx_geo);
 
             let start_lat = {{ page_tx_latitude }};
             let start_lon = {{ page_tx_longitude }};
@@ -729,6 +740,12 @@
                 color: 'orange',
                 steps: 50
             }).addTo(map2);
+
+            if (global_rx_lat != -1 && global_rx_lon != -1) {
+                marker_rx_geo = L.marker([global_rx_lat, global_rx_lon]).addTo(map2)
+                {#.bindPopup('RX')#}
+                {#.openPopup();#}
+            }
 
         }
 
