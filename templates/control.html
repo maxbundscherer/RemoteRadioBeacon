@@ -612,6 +612,13 @@
             steps: 50
         }).addTo(map2);
 
+        var geodesic_marker_is_back = L.geodesic([[{{ page_tx_latitude }}, {{ page_tx_latitude }}], [{{ page_tx_latitude }}, {{ page_tx_latitude }}]], {
+            weight: 2,
+            opacity: 1,
+            color: 'yellow',
+            steps: 50
+        }).addTo(map2);
+
         var terminator = L.terminator().addTo(map2);
         setInterval(function () {
             terminator.setTime();
@@ -622,6 +629,7 @@
             // Alten Marker entfernen
             map2.removeLayer(geodesic_marker_is);
             map2.removeLayer(geodesic_marker_should);
+            map2.removeLayer(geodesic_marker_is_back);
 
             let start_lat = {{ page_tx_latitude }};
             let start_lon = {{ page_tx_longitude }};
@@ -629,6 +637,7 @@
             {#let simulated_distance = 10000;  // Simulierte Entfernung (in Kilometern)#}
 
             var simulated_distance = 20000;
+            var simulated_distance_short = 5000;
 
             // Konvertiere Bearing in Radians
             let bearingRad = bearingDegree * Math.PI / 180;
@@ -660,6 +669,20 @@
                 weight: 2,
                 opacity: 1,
                 color: 'blue',
+                steps: 50
+            }).addTo(map2);
+
+            let bearingRadIs_Back = (bearingDegree + 180) * Math.PI / 180;
+
+            let end_lat_is_back = Math.asin(Math.sin(start_lat * Math.PI / 180) * Math.cos(simulated_distance_short / R) +
+                Math.cos(start_lat * Math.PI / 180) * Math.sin(simulated_distance_short / R) * Math.cos(bearingRadIs_Back)) * 180 / Math.PI;
+            let end_lon_is_back = start_lon + Math.atan2(Math.sin(bearingRadIs_Back) * Math.sin(simulated_distance_short / R) * Math.cos(start_lat * Math.PI / 180),
+                Math.cos(simulated_distance_short / R) - Math.sin(start_lat * Math.PI / 180) * Math.sin(end_lat_is_back * Math.PI / 180)) * 180 / Math.PI;
+
+            geodesic_marker_is_back = L.geodesic([[start_lat, start_lon], [end_lat_is_back, end_lon_is_back]], {
+                weight: 2,
+                opacity: 1,
+                color: 'yellow',
                 steps: 50
             }).addTo(map2);
 
