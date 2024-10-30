@@ -313,47 +313,6 @@
     <p>Automatically calculates the parameters for the <i>Ant Rotor Control</i> section.<br>Displays the information and
         position on a map.</p>
 
-    <form action="javascript:calc_ant_rotor_params_maidenhead()">
-        <table class="tab-content">
-            <tr>
-                <td class="tab-first-col">Maidenhead</td>
-                <td class="tab-second-col"><input type="text" class="input-same-width"
-                                                  id="form_calc_maidenhead"
-                                                  name="form_calc_maidenhead"
-                                                  value="{{ page_tx_maidenhead }}"></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><input type="submit" value="Calculate on Locator"></td>
-            </tr>
-        </table>
-    </form>
-
-    <br>
-
-    <form action="javascript:calc_ant_rotor_params_gps()">
-        <table class="tab-content">
-            <tr>
-                <td class="tab-first-col">GPS Latitude</td>
-                <td class="tab-second-col"><input type="text" class="input-same-width"
-                                                  id="form_calc_gps_lat"
-                                                  name="form_calc_gps_lat"
-                                                  value="{{ page_tx_latitude }}"></td>
-            </tr>
-            <tr>
-                <td class="tab-first-col">GPS Longitude</td>
-                <td class="tab-second-col"><input type="text" class="input-same-width"
-                                                  id="form_calc_gps_lon"
-                                                  name="form_calc_gps_lon"
-                                                  value="{{ page_tx_longitude }}"></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><input type="submit" value="Calculate on Lat/Lon"></td>
-            </tr>
-        </table>
-    </form>
-
     <br>
 
     <table class="tab-content">
@@ -509,33 +468,89 @@
 
     <h4>Control</h4>
 
-    <form action="javascript:form_set_ant_rot_azimuth()">
-        <table class="tab-content">
-            <tr>
-                <td class="tab-first-col">Azimuth (Degree)</td>
-                <td class="tab-second-col"><input type="text" class="input-same-width"
-                                                  id="form_ant_rot_azimuth"
-                                                  name="form_ant_rot_azimuth"
-                                                  value="0"></td>
-                <td><input type="submit" value="Set"></td>
-            </tr>
-        </table>
-    </form>
 
-    <form action="javascript:form_set_ant_rot_elevation()">
-        <table class="tab-content">
-            <tr>
-                <td class="tab-first-col">Elevation (Degree)</td>
-                <td class="tab-second-col"><input type="text" class="input-same-width"
-                                                  id="form_ant_rot_elevation"
-                                                  name="form_ant_rot_elevation"
-                                                  value="0"></td>
-                <td><input type="submit" value="Set"></td>
-            </tr>
-        </table>
-    </form>
+    <table>
 
-    <br/>
+        <tr>
+
+            <td>
+                <form action="javascript:form_set_ant_rot_azimuth()">
+                    <table class="tab-content">
+                        <tr>
+                            <td class="tab-first-col">Azimuth (Degree)</td>
+                            <td class="tab-second-col"><input type="text" class="input-same-width"
+                                                              id="form_ant_rot_azimuth"
+                                                              name="form_ant_rot_azimuth"
+                                                              value="0"></td>
+                            <td><input type="submit" value="Set"></td>
+                        </tr>
+                    </table>
+                </form>
+
+                <form action="javascript:form_set_ant_rot_elevation()">
+                    <table class="tab-content">
+                        <tr>
+                            <td class="tab-first-col">Elevation (Degree)</td>
+                            <td class="tab-second-col"><input type="text" class="input-same-width"
+                                                              id="form_ant_rot_elevation"
+                                                              name="form_ant_rot_elevation"
+                                                              value="0"></td>
+                            <td><input type="submit" value="Set"></td>
+                        </tr>
+                    </table>
+                </form>
+            </td>
+
+
+            <td>
+                <form action="javascript:calc_ant_rotor_params_maidenhead()">
+                    <table class="tab-content">
+                        <tr>
+                            <td class="tab-first-col">Maidenhead</td>
+                            <td class="tab-second-col"><input type="text" class="input-same-width"
+                                                              id="form_calc_maidenhead"
+                                                              name="form_calc_maidenhead"
+                                                              value="{{ page_tx_maidenhead }}"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="submit" value="Calculate on Locator"></td>
+                        </tr>
+                    </table>
+                </form>
+            </td>
+
+
+            <td>
+                <form action="javascript:calc_ant_rotor_params_gps()">
+                    <table class="tab-content">
+                        <tr>
+                            <td class="tab-first-col">GPS Latitude</td>
+                            <td class="tab-second-col"><input type="text" class="input-same-width"
+                                                              id="form_calc_gps_lat"
+                                                              name="form_calc_gps_lat"
+                                                              value="{{ page_tx_latitude }}"></td>
+                        </tr>
+                        <tr>
+                            <td class="tab-first-col">GPS Longitude</td>
+                            <td class="tab-second-col"><input type="text" class="input-same-width"
+                                                              id="form_calc_gps_lon"
+                                                              name="form_calc_gps_lon"
+                                                              value="{{ page_tx_longitude }}"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="submit" value="Calculate on Lat/Lon"></td>
+                        </tr>
+                    </table>
+                </form>
+            </td>
+
+        </tr>
+
+    </table>
+
+
 
     <canvas id="myCanvas" width="100" height="100" style="margin: 0; padding: 0"></canvas>
     <script>
