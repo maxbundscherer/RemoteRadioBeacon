@@ -315,20 +315,7 @@
 
     <br>
 
-    <table class="tab-content">
-        <tr>
-            <td class="tab-first-col">RX-Distance (km)</td>
-            <td class="tab-second">
-                <label id="lbl_calc_rx_distance">0</label>
-            </td>
-        </tr>
-        <tr>
-            <td class="tab-first-col">RX-Azimuth (Degree)</td>
-            <td class="tab-second">
-                <label id="lbl_calc_rx_azimuth">0</label>
-            </td>
-        </tr>
-    </table>
+
 
     <br>
     <div id="map"></div>
@@ -468,7 +455,6 @@
 
     <h4>Control</h4>
 
-
     <table>
 
         <tr>
@@ -521,29 +507,87 @@
             </td>
 
 
+            {#            <td>#}
+            {#                <form action="javascript:calc_ant_rotor_params_gps()">#}
+            {#                    <table class="tab-content">#}
+            {#                        <tr>#}
+            {#                            <td class="tab-first-col">GPS Latitude</td>#}
+            {#                            <td class="tab-second-col"><input type="text" class="input-same-width"#}
+            {#                                                              id="form_calc_gps_lat"#}
+            {#                                                              name="form_calc_gps_lat"#}
+            {#                                                              value="{{ page_tx_latitude }}"></td>#}
+            {#                        </tr>#}
+            {#                        <tr>#}
+            {#                            <td class="tab-first-col">GPS Longitude</td>#}
+            {#                            <td class="tab-second-col"><input type="text" class="input-same-width"#}
+            {#                                                              id="form_calc_gps_lon"#}
+            {#                                                              name="form_calc_gps_lon"#}
+            {#                                                              value="{{ page_tx_longitude }}"></td>#}
+            {#                        </tr>#}
+            {#                        <tr>#}
+            {#                            <td></td>#}
+            {#                            <td><input type="submit" value="Calculate on Lat/Lon"></td>#}
+            {#                        </tr>#}
+            {#                    </table>#}
+            {#                </form>#}
+            {#            </td>#}
+
             <td>
-                <form action="javascript:calc_ant_rotor_params_gps()">
-                    <table class="tab-content">
-                        <tr>
-                            <td class="tab-first-col">GPS Latitude</td>
-                            <td class="tab-second-col"><input type="text" class="input-same-width"
-                                                              id="form_calc_gps_lat"
-                                                              name="form_calc_gps_lat"
-                                                              value="{{ page_tx_latitude }}"></td>
-                        </tr>
-                        <tr>
-                            <td class="tab-first-col">GPS Longitude</td>
-                            <td class="tab-second-col"><input type="text" class="input-same-width"
-                                                              id="form_calc_gps_lon"
-                                                              name="form_calc_gps_lon"
-                                                              value="{{ page_tx_longitude }}"></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td><input type="submit" value="Calculate on Lat/Lon"></td>
-                        </tr>
-                    </table>
-                </form>
+                <canvas id="myCanvas" width="75" height="75" style="margin: 0; padding: 0"></canvas>
+                <script>
+                    // Funktion, um den Kreis und die Linien zu zeichnen
+                    function drawCircleWithLines(redAngle, greenAngle) {
+                        const canvas = document.getElementById('myCanvas');
+                        const ctx = canvas.getContext('2d');
+
+                        // Canvas leeren
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                        // Mittelpunkt des Kreises
+                        const centerX = canvas.width / 2;
+                        const centerY = canvas.height / 2;
+                        const radius = 20; // Radius auf 40 reduzieren, da die Canvasgröße klein ist
+
+                        // Kreis zeichnen
+                        ctx.beginPath();
+                        ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+                        ctx.strokeStyle = 'black';
+                        ctx.lineWidth = 2;
+                        ctx.stroke();
+
+                        // Funktion, um Winkel in Radiant umzuwandeln
+                        function degreesToRadians(degrees) {
+                            return (degrees - 90) * (Math.PI / 180); // 90 Grad abziehen, um den Nullpunkt auf 12 Uhr zu setzen
+                        }
+
+                        // Rote Linie zeichnen
+                        const redRadians = degreesToRadians(redAngle);
+                        const redX = centerX + radius * Math.cos(redRadians);
+                        const redY = centerY + radius * Math.sin(redRadians);
+
+                        ctx.beginPath();
+                        ctx.moveTo(centerX, centerY);
+                        ctx.lineTo(redX, redY);
+                        ctx.strokeStyle = 'red';
+                        ctx.lineWidth = 2;
+                        ctx.stroke();
+
+                        // Grüne Linie zeichnen
+                        const greenRadians = degreesToRadians(greenAngle);
+                        const greenX = centerX + radius * Math.cos(greenRadians);
+                        const greenY = centerY + radius * Math.sin(greenRadians);
+
+                        ctx.beginPath();
+                        ctx.moveTo(centerX, centerY);
+                        ctx.lineTo(greenX, greenY);
+                        ctx.strokeStyle = 'blue';
+                        ctx.lineWidth = 2;
+                        ctx.stroke();
+                    }
+
+                    drawCircleWithLines(0, 0);
+
+                </script>
             </td>
 
         </tr>
@@ -552,63 +596,6 @@
 
 
 
-    <canvas id="myCanvas" width="100" height="100" style="margin: 0; padding: 0"></canvas>
-    <script>
-        // Funktion, um den Kreis und die Linien zu zeichnen
-        function drawCircleWithLines(redAngle, greenAngle) {
-            const canvas = document.getElementById('myCanvas');
-            const ctx = canvas.getContext('2d');
-
-            // Canvas leeren
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            // Mittelpunkt des Kreises
-            const centerX = canvas.width / 2;
-            const centerY = canvas.height / 2;
-            const radius = 40; // Radius auf 40 reduzieren, da die Canvasgröße klein ist
-
-            // Kreis zeichnen
-            ctx.beginPath();
-            ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
-            ctx.strokeStyle = 'black';
-            ctx.lineWidth = 2;
-            ctx.stroke();
-
-            // Funktion, um Winkel in Radiant umzuwandeln
-            function degreesToRadians(degrees) {
-                return (degrees - 90) * (Math.PI / 180); // 90 Grad abziehen, um den Nullpunkt auf 12 Uhr zu setzen
-            }
-
-            // Rote Linie zeichnen
-            const redRadians = degreesToRadians(redAngle);
-            const redX = centerX + radius * Math.cos(redRadians);
-            const redY = centerY + radius * Math.sin(redRadians);
-
-            ctx.beginPath();
-            ctx.moveTo(centerX, centerY);
-            ctx.lineTo(redX, redY);
-            ctx.strokeStyle = 'red';
-            ctx.lineWidth = 2;
-            ctx.stroke();
-
-            // Grüne Linie zeichnen
-            const greenRadians = degreesToRadians(greenAngle);
-            const greenX = centerX + radius * Math.cos(greenRadians);
-            const greenY = centerY + radius * Math.sin(greenRadians);
-
-            ctx.beginPath();
-            ctx.moveTo(centerX, centerY);
-            ctx.lineTo(greenX, greenY);
-            ctx.strokeStyle = 'blue';
-            ctx.lineWidth = 2;
-            ctx.stroke();
-        }
-
-        drawCircleWithLines(0, 0);
-
-    </script>
-
-    <br/>
 
     <div id="map2" style="width: 1200px; height: 600px"></div>
     <script>
@@ -766,22 +753,52 @@
 
     </script>
 
-    <h4>Overview</h4>
+    {#    <h4>Overview</h4>#}
 
-    <table class="tab-content">
+    <table>
+
         <tr>
-            <td>Last Updated (UTC)</td>
-            <td><label id="lbl_ant_rot_last_updated">tbd</label></td>
+
+            <td>
+                <table class="tab-content">
+                    <tr>
+                        <td>Last Updated (UTC)</td>
+                        <td><label id="lbl_ant_rot_last_updated">tbd</label></td>
+                    </tr>
+                    <tr>
+                        <td>Azimuth (Degree)</td>
+                        <td><label id="lbl_ant_rot_azimuth">tbd</label></td>
+                    </tr>
+                    <tr>
+                        <td>Elevation (Degree)</td>
+                        <td><label id="lbl_ant_rot_elevation">tbd</label></td>
+                    </tr>
+                </table>
+            </td>
+
+            <td>
+                <table class="tab-content">
+                    <tr>
+                        <td class="tab-first-col">RX-Distance (km)</td>
+                        <td class="tab-second">
+                            <label id="lbl_calc_rx_distance">0</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tab-first-col">RX-Azimuth (Degree)</td>
+                        <td class="tab-second">
+                            <label id="lbl_calc_rx_azimuth">0</label>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+
+
         </tr>
-        <tr>
-            <td>Azimuth (Degree)</td>
-            <td><label id="lbl_ant_rot_azimuth">tbd</label></td>
-        </tr>
-        <tr>
-            <td>Elevation (Degree)</td>
-            <td><label id="lbl_ant_rot_elevation">tbd</label></td>
-        </tr>
+
     </table>
+
+
 
     <h3>Radio</h3>
 

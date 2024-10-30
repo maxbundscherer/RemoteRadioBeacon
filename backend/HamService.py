@@ -82,8 +82,8 @@ class HamService:
             maidenhead=LocationUtil.coordinates_to_maidenhead(gps_1),
             latitude=gps_1.latitude,
             longitude=gps_1.longitude,
-            distance=round(da.distance, 3),
-            azimuth=round(da.azimuth, 2)
+            distance=int(da.distance),
+            azimuth=int(da.azimuth)
         )
 
     def calc_ant_rotor_params_by_mai(self, maidenhead: str) -> AntRotorParams:
@@ -99,6 +99,6 @@ class HamService:
             maidenhead=maidenhead,
             latitude=gps_1.latitude,
             longitude=gps_1.longitude,
-            distance=round(da.distance, 3),
-            azimuth=round(da.azimuth, 2)
+            distance=int(da.distance),
+            azimuth=int(da.azimuth)
         )
