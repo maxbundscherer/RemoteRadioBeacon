@@ -21,4 +21,4 @@ def switch_read(port, debuglog=True):
 
 
 if __name__ == '__main__':
-    switch_read('/dev/ttyUSB0')
+    switch_read('/dev/ttyUSB1')
