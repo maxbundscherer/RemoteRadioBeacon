@@ -34,4 +34,4 @@ if __name__ == '__main__':
     assert len(sys.argv) == 2, "Usage: python ant-switch-set.py <antenna_number>"
     ant = int(sys.argv[1])
 
-    switch_control('/dev/ttyUSB1', ant)
+    switch_control('/dev/ttyUSB0', ant)

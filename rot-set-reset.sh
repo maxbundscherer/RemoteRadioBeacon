@@ -1,1 +1,1 @@
-rotctl -m 406 -r /dev/ttyUSB0 P 326 0;
+rotctl -m 406 -r /dev/ttyUSB1 P 0 0;
